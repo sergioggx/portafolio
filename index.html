@@ -18,7 +18,8 @@
 
         header {
             background-color: #1f1f1f;
-            padding: 2.5rem 1rem;
+            /* SE HA REDUCIDO EL PADDING INFERIOR DE 2.5rem A 1.5rem */
+            padding: 2.5rem 1rem 1.5rem 1rem; 
             text-align: center;
             border-bottom: 2px solid #333;
         }
@@ -32,6 +33,7 @@
         header p {
             color: #b3b3b3;
             margin-top: 0.5rem;
+            margin-bottom: 0; /* EVITA QUE EL TEXTO GENERE ESPACIO EXTRA HACIA ABAJO */
             font-size: 1.1rem;
         }
 
@@ -84,8 +86,8 @@
         }
 
         main {
-            max-width: 1100px; /* Un poco más ancho para albergar las dos columnas cómodamente */
-            margin: 2rem auto;
+            max-width: 1100px;
+            margin: 1rem auto 2rem auto; /* SE REDUJO EL MARGEN SUPERIOR DE 2rem A 1rem */
             padding: 0 1rem;
         }
 
@@ -97,6 +99,7 @@
         .introduccion h2 {
             color: #ffffff;
             font-size: 1.8rem;
+            margin-top: 0.5rem; /* AJUSTADO PARA EVITAR HUECOS GRANDES */
             margin-bottom: 0.5rem;
         }
 
@@ -142,7 +145,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 220px; /* Mantiene homogeneidad visual */
+            min-height: 220px;
             transition: transform 0.2s, border-color 0.2s;
         }
 
@@ -185,7 +188,7 @@
             background-color: #008c9e;
         }
 
-        /* RESPONSIVE: Si la pantalla es pequeña (Móvil), se pone una columna bajo la otra */
+        /* RESPONSIVE */
         @media (max-width: 800px) {
             .contenedor-columnas {
                 flex-direction: column;
@@ -255,8 +258,6 @@
                         <p>Configuración integral y aprovisionamiento de un dominio corporativo utilizando entornos Windows Server. Diseño detallado de la infraestructura de Unidades Organizativas (OUs), despliegue de Directivas de Grupo (GPOs), junto con arquitecturas redundantes para servidores DNS y DHCP.</p>
                         <a href="URL_DE_TU_PDF_WINDOWS_1" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
                     </div>
-
-                    <!-- Aquí puedes duplicar el bloque de arriba fácilmente para añadir un segundo proyecto de Windows cuando quieras -->
 
                 </div>
             </section>
