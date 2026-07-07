@@ -18,33 +18,25 @@
 
         header {
             background-color: #1f1f1f;
-            /* SE HA REDUCIDO EL PADDING INFERIOR DE 2.5rem A 1.5rem */
-            padding: 2.5rem 1rem 1.5rem 1rem; 
+            /* SE HA REDUCIDO EL PADDING PARA LOGRAR EL ASPECTO COMPACTO */
+            padding: 1.5rem 1rem; 
             text-align: center;
             border-bottom: 2px solid #333;
+            /* ASEGURAMOS QUE NO HAYA MARGEN INFERIOR */
+            margin-bottom: 0; 
         }
 
         header h1 {
             margin: 0;
             color: #00adb5;
             font-size: 2.2rem;
+            margin-bottom: 0.2rem; /* PEQUEÑO ESPACIO DEBAJO DEL NOMBRE */
         }
 
         header p {
             color: #b3b3b3;
-            margin-top: 0.5rem;
-            margin-bottom: 0; /* EVITA QUE EL TEXTO GENERE ESPACIO EXTRA HACIA ABAJO */
+            margin: 0; /* ELIMINAMOS TODOS LOS MÁRGENES */
             font-size: 1.1rem;
-        }
-
-        .contacto-header {
-            margin-top: 1rem;
-            color: #a0a0a0;
-            font-size: 0.95rem;
-        }
-
-        .contacto-header span {
-            margin: 0 10px;
         }
 
         /* Menú de Navegación */
@@ -54,10 +46,13 @@
             justify-content: center;
             align-items: center;
             border-bottom: 1px solid #222;
-            padding: 0.7rem 0;
+            /* AJUSTAMOS EL PADDING PARA QUE SE VEA COMO LA IMAGEN */
+            padding: 0.8rem 0; 
             position: sticky;
             top: 0;
             z-index: 1000;
+            /* ELIMINAMOS EL MARGEN SUPERIOR PARA QUE SE PEGUE AL HEADER */
+            margin-top: 0; 
         }
 
         nav .nav-titulo {
@@ -87,7 +82,8 @@
 
         main {
             max-width: 1100px;
-            margin: 1rem auto 2rem auto; /* SE REDUJO EL MARGEN SUPERIOR DE 2rem A 1rem */
+            /* AJUSTAMOS EL MARGEN SUPERIOR DE MAIN */
+            margin: 1rem auto 2rem auto; 
             padding: 0 1rem;
         }
 
@@ -212,7 +208,6 @@
         <p>Administración de Sistemas Informáticos en Red | Telecomunicaciones</p>
     </header>
 
-    <!-- MENÚ DE NAVEGACIÓN -->
     <nav>
         <span class="nav-titulo">Portafolio de Proyectos</span>
         <a href="URL_DE_TU_DRIVE_CV_PDF" target="_blank" class="btn-cv-nav">📥 Descargar CV (PDF)</a>
@@ -225,10 +220,8 @@
             <p>Repositorio de documentación técnica sobre despliegues, configuraciones y administración de entornos de red.</p>
         </div>
 
-        <!-- CONTENEDOR FLUIDO DE DOS COLUMNAS -->
         <div class="contenedor-columnas">
 
-            <!-- COLUMNA IZQUIERDA: LINUX -->
             <section class="columna-sistemas">
                 <h2 class="columna-titulo">Servidores Linux</h2>
                 <div class="lista-proyectos">
@@ -248,7 +241,6 @@
                 </div>
             </section>
 
-            <!-- COLUMNA DERECHA: WINDOWS SERVER -->
             <section class="columna-sistemas">
                 <h2 class="columna-titulo">Windows Server</h2>
                 <div class="lista-proyectos">
