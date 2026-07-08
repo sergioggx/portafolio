@@ -54,7 +54,7 @@
             justify-content: center;
             align-items: center;
             border-bottom: 1px solid #222;
-            padding: 0.7rem 0;
+            padding: 0.7rem 2rem; /* Se añade margen lateral base */
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -65,6 +65,7 @@
             font-size: 1.1rem;
             font-weight: bold;
             margin-right: 2rem;
+            white-space: nowrap; /* Evita roturas feas en resoluciones intermedias */
         }
 
         /* Botón de descarga de CV en el menú */
@@ -113,6 +114,7 @@
 
         /* Cada columna principal (Linux / Windows) */
         .columna-sistemas {
+            box-sizing: border-box;
             flex: 1;
             background-color: #161616;
             border-radius: 8px;
@@ -189,10 +191,31 @@
             background-color: #008c9e;
         }
 
-        /* RESPONSIVE */
+        /* RESPONSIVE Y MEJORAS PARA MÓVIL */
         @media (max-width: 800px) {
             .contenedor-columnas {
                 flex-direction: column;
+            }
+        }
+
+        /* Solución específica para centrar y separar el menú de los extremos en el móvil */
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column; /* Apila el título y el botón en vertical */
+                justify-content: center;
+                align-items: center;
+                gap: 12px;              /* Espacio intermedio controlado */
+                padding: 1rem 2rem;     /* El '2rem' empuja todo hacia adentro alejándolo de los extremos */
+                text-align: center;
+            }
+
+            nav .nav-titulo {
+                margin-right: 0;        /* Elimina el margen lateral innecesario en vertical */
+                white-space: normal;    /* Deja que se acomode de forma fluida */
+            }
+            
+            .btn-cv-nav {
+                width: auto;            /* Mantiene el tamaño estilizado del botón sin romper el layout */
             }
         }
 
@@ -213,7 +236,6 @@
         <p>Administración de Sistemas Informáticos en Red | Telecomunicaciones</p>
     </header>
 
-    <!-- MENÚ DE NAVEGACIÓN -->
     <nav>
         <span class="nav-titulo">Portafolio de Proyectos</span>
         <a href="URL_DE_TU_DRIVE_CV_PDF" target="_blank" class="btn-cv-nav">📥 Descargar CV (PDF)</a>
@@ -226,10 +248,8 @@
             <p>Repositorio de documentación técnica sobre despliegues, configuraciones y administración de entornos de red.</p>
         </div>
 
-        <!-- CONTENEDOR FLUIDO DE DOS COLUMNAS -->
         <div class="contenedor-columnas">
 
-            <!-- COLUMNA IZQUIERDA: LINUX -->
             <section class="columna-sistemas">
                 <h2 class="columna-titulo">Servidores Linux</h2>
                 <div class="lista-proyectos">
@@ -249,7 +269,6 @@
                 </div>
             </section>
 
-            <!-- COLUMNA DERECHA: WINDOWS SERVER -->
             <section class="columna-sistemas">
                 <h2 class="columna-titulo">Windows Server</h2>
                 <div class="lista-proyectos">
