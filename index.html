@@ -36,16 +36,6 @@
             font-size: 1.1rem;
         }
 
-        .contacto-header {
-            margin-top: 1rem;
-            color: #a0a0a0;
-            font-size: 0.95rem;
-        }
-
-        .contacto-header span {
-            margin: 0 10px;
-        }
-
         /* Menú de Navegación */
         nav {
             background-color: #1a1a1a;
@@ -104,41 +94,29 @@
             margin-bottom: 0.5rem;
         }
 
-        /* CONTENEDOR GRID DE DOS COLUMNAS */
-        .contenedor-columnas {
+        /* CABECERAS DE LAS COLUMNAS */
+        .cabeceras-sistemas {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Dos columnas idénticas */
+            grid-template-columns: 1fr 1fr;
             gap: 2rem;
-            align-items: stretch;
-        }
-
-        /* Cada columna principal (Linux / Windows) */
-        .columna-sistemas {
-            box-sizing: border-box;
-            background-color: #161616;
-            border-radius: 8px;
-            padding: 1.5rem;
-            border: 1px solid #222;
-            display: flex;
-            flex-direction: column;
+            margin-bottom: 1.5rem;
         }
 
         .columna-titulo {
             color: #00adb5;
             font-size: 1.5rem;
-            margin-top: 0;
-            margin-bottom: 1.5rem;
+            margin: 0;
             border-bottom: 2px solid #00adb5;
             padding-bottom: 0.5rem;
             text-align: center;
+            font-weight: bold;
         }
 
-        /* Fuerza a que las listas de proyectos crezcan de forma idéntica */
-        .lista-proyectos {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            flex-grow: 1;
+        /* CONTENEDOR GRID PRINCIPAL DE TARJETAS ALINEADAS */
+        .grid-proyectos {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Estructura rígida de 2 columnas */
+            gap: 2rem; /* Separación horizontal y vertical idéntica */
         }
 
         /* Tarjetas de cada proyecto */
@@ -149,7 +127,7 @@
             padding: 1.5rem;
             display: flex;
             flex-direction: column;
-            flex-grow: 1; /* Permite que la tarjeta ocupe el alto proporcional disponible */
+            box-sizing: border-box;
             transition: transform 0.2s, border-color 0.2s;
         }
 
@@ -173,7 +151,7 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Botón para ver PDFs de proyectos - Ahora alineado abajo automáticamente */
+        /* Botón para ver PDFs de proyectos - Alineado abajo magnéticamente */
         .btn-pdf {
             display: block;
             background-color: #00adb5;
@@ -194,8 +172,25 @@
 
         /* RESPONSIVE Y MEJORAS PARA MÓVIL */
         @media (max-width: 800px) {
-            .contenedor-columnas {
+            .cabeceras-sistemas {
+                display: none; /* Ocultamos las cabeceras dobles en móvil */
+            }
+
+            .grid-proyectos {
                 grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
+                gap: 1.5rem;
+            }
+
+            /* Añadimos un indicador visual o título sobre la tarjeta si es necesario en móvil */
+            .tarjeta-proyecto::before {
+                content: attr(data-sistema); /* Muestra si es Linux o Windows en pantallas pequeñas */
+                display: inline-block;
+                color: #00adb5;
+                font-size: 0.8rem;
+                text-transform: uppercase;
+                font-weight: bold;
+                margin-bottom: 0.5rem;
+                letter-spacing: 1px;
             }
         }
 
@@ -249,45 +244,42 @@
             <p>Repositorio de documentación técnica sobre despliegues, configuraciones y administración de entornos de red.</p>
         </div>
 
-        <div class="contenedor-columnas">
+        <!-- Títulos fijos de las columnas -->
+        <div class="cabeceras-sistemas">
+            <div class="columna-titulo">Servidores Linux</div>
+            <div class="columna-titulo">Windows Server</div>
+        </div>
 
-            <section class="columna-sistemas">
-                <h2 class="columna-titulo">Servidores Linux</h2>
-                <div class="lista-proyectos">
-                    
-                    <div class="tarjeta-proyecto">
-                        <h3>Servidor DHCP</h3>
-                        <p>Configuración y despliegue del servicio isc-dhcp-server en Ubuntu Server 26.04. Incluye la preparación de la interfaz de red estática mediante Netplan, la declaración de autoridad del servidor y la definición detallada del pool de direccionamiento dinámico (rango, máscara, tiempos de concesión y puerta de enlace) para los clientes de la red local.</p>
-                        <a href="URL_DE_TU_PDF_LINUX_DHCP" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
-                    </div>
+        <!-- Grid unificado donde las tarjetas se alinean fila por fila -->
+        <div class="grid-proyectos">
 
-                    <div class="tarjeta-proyecto">
-                        <h3>Servidor DNS con DHCP</h3>
-                        <p>Implementación del servidor DNS (bind9) con la configuración detallada de sus reenviadores, la creación de las zonas de resolución directa (red.lan) e inversa (0.168.192.in-addr.arpa), y su posterior integración con el archivo de configuración de DHCP para automatizar la entrega y resolución de nombres de dominio internos en los equipos de la red.</p>
-                        <a href="URL_DE_TU_PDF_LINUX_DNS" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
-                    </div>
+            <!-- FILA 1 - PROYECTO DE LA IZQUIERDA (LINUX) -->
+            <div class="tarjeta-proyecto" data-sistema="Servidores Linux">
+                <h3>Servidor DHCP</h3>
+                <p>Configuración y despliegue del servicio isc-dhcp-server en Ubuntu Server 26.04. Incluye la preparación de la interfaz de red estática mediante Netplan, la declaración de autoridad del servidor y la definición detallada del pool de direccionamiento dinámico (rango, máscara, tiempos de concesión y puerta de enlace) para los clientes de la red local.</p>
+                <a href="URL_DE_TU_PDF_LINUX_DHCP" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
+            </div>
 
-                </div>
-            </section>
+            <!-- FILA 1 - PROYECTO DE LA DERECHA (WINDOWS) -->
+            <div class="tarjeta-proyecto" data-sistema="Windows Server">
+                <h3>Servidor DHCP</h3>
+                <p>Este módulo detalla la instalación, inicio y configuración del servicio DHCP en Windows Server, incluyendo la creación y activación de ámbitos IP, establecimiento de exclusiones, configuración de tiempos de concesión y realización de reservas de red tanto para clientes Windows 10 como Xubuntu[cite: 1].</p>
+                <a href="URL_DE_TU_PDF_WINDOWS_DHCP" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
+            </div>
 
-            <section class="columna-sistemas">
-                <h2 class="columna-titulo">Windows Server</h2>
-                <div class="lista-proyectos">
+            <!-- FILA 2 - PROYECTO DE LA IZQUIERDA (LINUX) -->
+            <div class="tarjeta-proyecto" data-sistema="Servidores Linux">
+                <h3>Servidor DNS con DHCP</h3>
+                <p>Implementación del servidor DNS (bind9) con la configuración detallada de sus reenviadores, la creación de las zonas de resolución directa (red.lan) e inversa (0.168.192.in-addr.arpa), y su posterior integración con el archivo de configuración de DHCP para automatizar la entrega y resolución de nombres de dominio internos en los equipos de la red.</p>
+                <a href="URL_DE_TU_PDF_LINUX_DNS" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
+            </div>
 
-                    <div class="tarjeta-proyecto">
-                        <h3>Servidor DHCP</h3>
-                        <p>Este módulo detalla la instalación, inicio y configuración del servicio DHCP en Windows Server, incluyendo la creación y activación de ámbitos IP, establecimiento de exclusiones, configuración de tiempos de concesión y realización de reservas de red tanto para clientes Windows 10 como Xubuntu[cite: 1].</p>
-                        <a href="URL_DE_TU_PDF_WINDOWS_DHCP" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
-                    </div>
-
-                    <div class="tarjeta-proyecto">
-                        <h3>Servidor DNS</h3>
-                        <p>Este módulo describe el proceso para agregar la característica de DNS en el servidor, abarcando la creación de una zona principal (tanto directa como inversa), la adición de nuevos hosts y alias (CNAME), y la posterior verificación del correcto funcionamiento de la resolución de nombres mediante la herramienta nslookup[cite: 2].</p>
-                        <a href="URL_DE_TU_PDF_WINDOWS_DNS" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
-                    </div>
-
-                </div>
-            </section>
+            <!-- FILA 2 - PROYECTO DE LA DERECHA (WINDOWS) -->
+            <div class="tarjeta-proyecto" data-sistema="Windows Server">
+                <h3>Servidor DNS</h3>
+                <p>Este módulo describe el proceso para agregar la característica de DNS en el servidor, abarcando la creación de una zona principal (tanto directa como inversa), la adición de nuevos hosts y alias (CNAME), y la posterior verificación del correcto funcionamiento de la resolución de nombres mediante la herramienta nslookup[cite: 2].</p>
+                <a href="URL_DE_TU_PDF_WINDOWS_DNS" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
+            </div>
 
         </div>
 
