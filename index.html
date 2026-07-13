@@ -18,7 +18,6 @@
 
         header {
             background-color: #1f1f1f;
-            /* SE HA REDUCIDO EL PADDING INFERIOR DE 2.5rem A 1.5rem */
             padding: 2.5rem 1rem 1.5rem 1rem; 
             text-align: center;
             border-bottom: 2px solid #333;
@@ -33,7 +32,7 @@
         header p {
             color: #b3b3b3;
             margin-top: 0.5rem;
-            margin-bottom: 0; /* EVITA QUE EL TEXTO GENERE ESPACIO EXTRA HACIA ABAJO */
+            margin-bottom: 0;
             font-size: 1.1rem;
         }
 
@@ -54,7 +53,7 @@
             justify-content: center;
             align-items: center;
             border-bottom: 1px solid #222;
-            padding: 0.7rem 2rem; /* Se añade margen lateral base */
+            padding: 0.7rem 2rem;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -65,7 +64,7 @@
             font-size: 1.1rem;
             font-weight: bold;
             margin-right: 2rem;
-            white-space: nowrap; /* Evita roturas feas en resoluciones intermedias */
+            white-space: nowrap;
         }
 
         /* Botón de descarga de CV en el menú */
@@ -88,12 +87,12 @@
 
         main {
             max-width: 1100px;
-            margin: 1rem auto 2rem auto; /* SE REDUJO EL MARGEN SUPERIOR DE 2rem A 1rem */
+            margin: 1rem auto 2rem auto;
             padding: 0 1rem;
         }
 
         .introduccion {
-            margin-top: 0; /* SE ELIMINÓ EL MARGEN SUPERIOR PARA PEGARLO AL NAV */
+            margin-top: 0;
             margin-bottom: 2.5rem;
             text-align: center;
         }
@@ -101,25 +100,27 @@
         .introduccion h2 {
             color: #ffffff;
             font-size: 1.8rem;
-            margin-top: 0.5rem; /* AJUSTADO PARA EVITAR HUECOS GRANDES */
+            margin-top: 0.5rem;
             margin-bottom: 0.5rem;
         }
 
-        /* CONTENEDOR DE DOS COLUMNAS */
+        /* CONTENEDOR GRID DE DOS COLUMNAS */
         .contenedor-columnas {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dos columnas idénticas */
             gap: 2rem;
-            align-items: flex-start;
+            align-items: stretch;
         }
 
         /* Cada columna principal (Linux / Windows) */
         .columna-sistemas {
             box-sizing: border-box;
-            flex: 1;
             background-color: #161616;
             border-radius: 8px;
             padding: 1.5rem;
             border: 1px solid #222;
+            display: flex;
+            flex-direction: column;
         }
 
         .columna-titulo {
@@ -132,11 +133,12 @@
             text-align: center;
         }
 
-        /* Bloque vertical para apilar tarjetas dentro de la misma columna */
+        /* Fuerza a que las listas de proyectos crezcan de forma idéntica */
         .lista-proyectos {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+            flex-grow: 1;
         }
 
         /* Tarjetas de cada proyecto */
@@ -147,8 +149,7 @@
             padding: 1.5rem;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            min-height: 220px;
+            flex-grow: 1; /* Permite que la tarjeta ocupe el alto proporcional disponible */
             transition: transform 0.2s, border-color 0.2s;
         }
 
@@ -167,15 +168,14 @@
         .tarjeta-proyecto p {
             color: #a0a0a0;
             font-size: 0.95rem;
-            flex-grow: 1;
             text-align: justify;
             margin-top: 0;
             margin-bottom: 1.5rem;
         }
 
-        /* Botón para ver PDFs de proyectos */
+        /* Botón para ver PDFs de proyectos - Ahora alineado abajo automáticamente */
         .btn-pdf {
-            display: inline-block;
+            display: block;
             background-color: #00adb5;
             color: #ffffff;
             text-decoration: none;
@@ -185,6 +185,7 @@
             font-weight: bold;
             font-size: 0.95rem;
             transition: background-color 0.2s;
+            margin-top: auto; /* Empuja el botón siempre al fondo de la tarjeta */
         }
 
         .btn-pdf:hover {
@@ -194,28 +195,28 @@
         /* RESPONSIVE Y MEJORAS PARA MÓVIL */
         @media (max-width: 800px) {
             .contenedor-columnas {
-                flex-direction: column;
+                grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
             }
         }
 
         /* Solución específica para centrar y separar el menú de los extremos en el móvil */
         @media (max-width: 600px) {
             nav {
-                flex-direction: column; /* Apila el título y el botón en vertical */
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                gap: 12px;              /* Espacio intermedio controlado */
-                padding: 1rem 2rem;     /* El '2rem' empuja todo hacia adentro alejándolo de los extremos */
+                gap: 12px;
+                padding: 1rem 2rem;
                 text-align: center;
             }
 
             nav .nav-titulo {
-                margin-right: 0;        /* Elimina el margen lateral innecesario en vertical */
-                white-space: normal;    /* Deja que se acomode de forma fluida */
+                margin-right: 0;
+                white-space: normal;
             }
             
             .btn-cv-nav {
-                width: auto;            /* Mantiene el tamaño estilizado del botón sin romper el layout */
+                width: auto;
             }
         }
 
@@ -275,13 +276,13 @@
 
                     <div class="tarjeta-proyecto">
                         <h3>Servidor DHCP</h3>
-                        <p>Este módulo detalla la instalación, inicio y configuración del servicio DHCP en Windows Server, incluyendo la creación y activación de ámbitos IP, establecimiento de exclusiones, configuración de tiempos de concesión y realización de reservas de red tanto para clientes Windows 10 como Xubuntu.</p>
+                        <p>Este módulo detalla la instalación, inicio y configuración del servicio DHCP en Windows Server, incluyendo la creación y activación de ámbitos IP, establecimiento de exclusiones, configuración de tiempos de concesión y realización de reservas de red tanto para clientes Windows 10 como Xubuntu[cite: 1].</p>
                         <a href="URL_DE_TU_PDF_WINDOWS_DHCP" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
                     </div>
 
                     <div class="tarjeta-proyecto">
                         <h3>Servidor DNS</h3>
-                        <p>Este módulo describe el proceso para agregar la característica de DNS en el servidor, abarcando la creación de una zona principal (tanto directa como inversa), la adición de nuevos hosts y alias (CNAME), y la posterior verificación del correcto funcionamiento de la resolución de nombres mediante la herramienta nslookup.</p>
+                        <p>Este módulo describe el proceso para agregar la característica de DNS en el servidor, abarcando la creación de una zona principal (tanto directa como inversa), la adición de nuevos hosts y alias (CNAME), y la posterior verificación del correcto funcionamiento de la resolución de nombres mediante la herramienta nslookup[cite: 2].</p>
                         <a href="URL_DE_TU_PDF_WINDOWS_DNS" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
                     </div>
 
