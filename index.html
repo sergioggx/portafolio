@@ -6,95 +6,120 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Portfolio de Sistemas | Sergio</title>
     <style>
-        /* Estilos globales - Modo Oscuro */
+        :root {
+            --bg-color: #0b0f17;
+            --card-bg: rgba(22, 27, 34, 0.75);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --accent-cyan: #00f2fe;
+            --accent-blue: #4facfe;
+            --text-main: #f0f6fc;
+            --text-sub: #8b949e;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(79, 172, 254, 0.04) 0%, transparent 40%);
+            background-attachment: fixed;
+            color: var(--text-main);
             margin: 0;
             padding: 0;
             line-height: 1.6;
         }
 
         header {
-            background-color: #1f1f1f;
-            padding: 2.5rem 1rem 1.5rem 1rem; 
+            background: rgba(11, 15, 23, 0.8);
+            backdrop-filter: blur(12px);
+            padding: 3rem 1rem 1.5rem 1rem;
             text-align: center;
-            border-bottom: 2px solid #333;
+            border-bottom: 1px solid var(--border-color);
         }
 
         header h1 {
             margin: 0;
-            color: #00adb5;
             font-size: 2.2rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         header p {
-            color: #b3b3b3;
-            margin-top: 0.5rem;
-            margin-bottom: 0;
-            font-size: 1.1rem;
+            color: var(--text-sub);
+            margin-top: 0.4rem;
+            font-size: 1rem;
+            font-weight: 400;
         }
 
-        /* Menú de Navegación */
         nav {
-            background-color: #1a1a1a;
+            background: rgba(15, 20, 31, 0.85);
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: center;
             align-items: center;
-            border-bottom: 1px solid #222;
-            padding: 0.7rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.8rem 2rem;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
         nav .nav-titulo {
-            color: #ffffff;
-            font-size: 1.1rem;
-            font-weight: bold;
+            color: var(--text-main);
+            font-size: 1rem;
+            font-weight: 600;
             margin-right: 2rem;
-            white-space: nowrap;
+            letter-spacing: 0.5px;
         }
 
-        /* Botón de descarga de CV en el menú */
         .btn-cv-nav {
-            background-color: transparent;
-            color: #00adb5;
-            border: 2px solid #00adb5;
+            position: relative;
+            background: rgba(0, 242, 254, 0.05);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 242, 254, 0.3);
             text-decoration: none;
-            padding: 0.4rem 1.2rem;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.95rem;
-            transition: all 0.2s;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            overflow: hidden;
         }
 
         .btn-cv-nav:hover {
-            background-color: #00adb5;
-            color: #ffffff;
+            background: var(--accent-cyan);
+            color: #0b0f17;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+            border-color: var(--accent-cyan);
         }
 
         main {
-            max-width: 1100px;
-            margin: 1rem auto 2rem auto;
-            padding: 0 1rem;
+            max-width: 1050px;
+            margin: 2rem auto 3rem auto;
+            padding: 0 1.5rem;
+            animation: fadeIn 0.8s ease-out;
         }
 
         .introduccion {
-            margin-top: 0;
-            margin-bottom: 2.5rem;
             text-align: center;
+            margin-bottom: 3rem;
         }
 
         .introduccion h2 {
-            color: #ffffff;
-            font-size: 1.8rem;
-            margin-top: 0.5rem;
+            font-size: 1.7rem;
+            font-weight: 600;
             margin-bottom: 0.5rem;
         }
 
-        /* CABECERAS DE LAS COLUMNAS */
+        .introduccion p {
+            color: var(--text-sub);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 0.95rem;
+        }
+
         .cabeceras-sistemas {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -103,125 +128,118 @@
         }
 
         .columna-titulo {
-            color: #00adb5;
-            font-size: 1.5rem;
-            margin: 0;
-            border-bottom: 2px solid #00adb5;
+            color: var(--accent-cyan);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
             padding-bottom: 0.5rem;
-            text-align: center;
-            font-weight: bold;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* CONTENEDOR GRID PRINCIPAL DE TARJETAS ALINEADAS */
+        .columna-titulo::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-cyan);
+        }
+
         .grid-proyectos {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Estructura rígida de 2 columnas */
-            gap: 2rem; /* Separación horizontal y vertical idéntica */
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
         }
 
-        /* Tarjetas de cada proyecto */
         .tarjeta-proyecto {
-            background-color: #1f1f1f;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 1.5rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.6rem;
             display: flex;
             flex-direction: column;
-            box-sizing: border-box;
-            transition: transform 0.2s, border-color 0.2s;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
         }
 
         .tarjeta-proyecto:hover {
-            transform: translateY(-3px);
-            border-color: #00adb5;
+            transform: translateY(-4px);
+            border-color: rgba(0, 242, 254, 0.4);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 12px rgba(0, 242, 254, 0.1);
         }
 
         .tarjeta-proyecto h3 {
-            margin-top: 0;
-            color: #ffffff;
-            font-size: 1.25rem;
-            margin-bottom: 0.8rem;
+            margin: 0 0 0.8rem 0;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
         .tarjeta-proyecto p {
-            color: #a0a0a0;
-            font-size: 0.95rem;
-            text-align: justify;
-            margin-top: 0;
-            margin-bottom: 1.5rem;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            margin: 0 0 1.8rem 0;
+            line-height: 1.5;
         }
 
-        /* Botón para ver PDFs de proyectos - Alineado abajo magnéticamente */
         .btn-pdf {
-            display: block;
-            background-color: #00adb5;
-            color: #ffffff;
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
             text-decoration: none;
-            padding: 0.6rem 1.5rem;
-            border-radius: 4px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 0.95rem;
-            transition: background-color 0.2s;
-            margin-top: auto; /* Empuja el botón siempre al fondo de la tarjeta */
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
         }
 
         .btn-pdf:hover {
-            background-color: #008c9e;
+            background: rgba(0, 242, 254, 0.1);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
         }
 
-        /* RESPONSIVE Y MEJORAS PARA MÓVIL */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         @media (max-width: 800px) {
-            .cabeceras-sistemas {
-                display: none; /* Ocultamos las cabeceras dobles en móvil */
-            }
-
-            .grid-proyectos {
-                grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
-                gap: 1.5rem;
-            }
-
-            /* Añadimos un indicador visual o título sobre la tarjeta si es necesario en móvil */
+            .cabeceras-sistemas { display: none; }
+            .grid-proyectos { grid-template-columns: 1fr; }
             .tarjeta-proyecto::before {
-                content: attr(data-sistema); /* Muestra si es Linux o Windows en pantallas pequeñas */
-                display: inline-block;
-                color: #00adb5;
-                font-size: 0.8rem;
+                content: attr(data-sistema);
+                color: var(--accent-cyan);
+                font-size: 0.75rem;
                 text-transform: uppercase;
-                font-weight: bold;
-                margin-bottom: 0.5rem;
                 letter-spacing: 1px;
+                margin-bottom: 0.4rem;
+                font-weight: 600;
             }
         }
 
-        /* Solución específica para centrar y separar el menú de los extremos en el móvil */
         @media (max-width: 600px) {
-            nav {
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 12px;
-                padding: 1rem 2rem;
-                text-align: center;
-            }
-
-            nav .nav-titulo {
-                margin-right: 0;
-                white-space: normal;
-            }
-            
-            .btn-cv-nav {
-                width: auto;
-            }
+            nav { flex-direction: column; gap: 10px; padding: 1rem; }
+            nav .nav-titulo { margin-right: 0; }
         }
 
         footer {
             text-align: center;
             padding: 2rem;
-            color: #666;
-            font-size: 0.9rem;
-            border-top: 1px solid #222;
-            margin-top: 4rem;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
         }
     </style>
 </head>
@@ -244,47 +262,35 @@
             <p>Repositorio de documentación técnica sobre despliegues, configuraciones y administración de entornos de red.</p>
         </div>
 
-        <!-- Títulos fijos de las columnas -->
         <div class="cabeceras-sistemas">
             <div class="columna-titulo">Servidores Linux</div>
             <div class="columna-titulo">Windows Server</div>
         </div>
 
-        <!-- Grid unificado donde las tarjetas se alinean fila por fila -->
         <div class="grid-proyectos">
 
-            <!-- FILA 1 - PROYECTO DE LA IZQUIERDA (LINUX) -->
             <div class="tarjeta-proyecto" data-sistema="Servidores Linux">
                 <h3>Servidor DHCP</h3>
-                <p>Configuración y despliegue del servicio isc-dhcp-server en Ubuntu Server 26.04. Incluye la preparación de la interfaz de red estática mediante Netplan, la declaración de autoridad del servidor y la definición detallada del pool de direccionamiento dinámico (rango, máscara, tiempos de concesión y puerta de enlace) para los clientes de la red local.</p>
+                <p>Configuración y despliegue del servicio isc-dhcp-server en Ubuntu Server 26.04. Incluye la preparación de la interfaz de red estática mediante Netplan, la declaración de autoridad del servidor y la definición detallada del pool de direccionamiento dinámico.</p>
                 <a href="URL_DE_TU_PDF_LINUX_DHCP" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
             </div>
-
-            <!-- FILA 1 - PROYECTO DE LA DERECHA (WINDOWS) -->
             <div class="tarjeta-proyecto" data-sistema="Windows Server">
                 <h3>Servidor DHCP</h3>
-                <p>Este módulo detalla la instalación, inicio y configuración del servicio DHCP en Windows Server, incluyendo la creación y activación de ámbitos IP, establecimiento de exclusiones, configuración de tiempos de concesión y realización de reservas de red tanto para clientes Windows 10 como Xubuntu[cite: 1].</p>
+                <p>Instalación, inicio y configuración del servicio DHCP en Windows Server, incluyendo la creación y activación de ámbitos IP, establecimiento de exclusiones, configuración de tiempos de concesión y realización de reservas de red.</p>
                 <a href="URL_DE_TU_PDF_WINDOWS_DHCP" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
             </div>
-
-            <!-- FILA 2 - PROYECTO DE LA IZQUIERDA (LINUX) -->
             <div class="tarjeta-proyecto" data-sistema="Servidores Linux">
                 <h3>Servidor DNS con DHCP</h3>
-                <p>Implementación del servidor DNS (bind9) con la configuración detallada de sus reenviadores, la creación de las zonas de resolución directa (red.lan) e inversa (0.168.192.in-addr.arpa), y su posterior integración con el archivo de configuración de DHCP para automatizar la entrega y resolución de nombres de dominio internos en los equipos de la red.</p>
+                <p>Implementación del servidor DNS (bind9) con la configuración detallada de sus reenviadores, la creación de las zonas de resolución directa e inversa, y su posterior integración con el archivo de configuración de DHCP.</p>
                 <a href="URL_DE_TU_PDF_LINUX_DNS" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
             </div>
-
-            <!-- FILA 2 - PROYECTO DE LA DERECHA (WINDOWS) -->
             <div class="tarjeta-proyecto" data-sistema="Windows Server">
                 <h3>Servidor DNS</h3>
-                <p>Este módulo describe el proceso para agregar la característica de DNS en el servidor, abarcando la creación de una zona principal (tanto directa como inversa), la adición de nuevos hosts y alias (CNAME), y la posterior verificación del correcto funcionamiento de la resolución de nombres mediante la herramienta nslookup[cite: 2].</p>
+                <p>Proceso para agregar la característica de DNS en el servidor, abarcando la creación de una zona principal (directa e inversa), la adición de nuevos hosts y alias (CNAME), y la verificación mediante nslookup.</p>
                 <a href="URL_DE_TU_PDF_WINDOWS_DNS" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
             </div>
-
         </div>
-
     </main>
-
     <footer>
         <p>&copy; 2026 - Sergio González García | Portfolio Profesional</p>
     </footer>
