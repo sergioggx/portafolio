@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Portfolio de Sistemas | Sergio</title>
+    <title>Portfolio de Sistemas | Sergio González</title>
+    
+    <!-- Favicon estilo consola -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230b0f17%22/><text x=%2250%25%22 y=%2265%25%22 font-size=%2260%22 font-family=%22monospace%22 font-weight=%22bold%22 fill=%22%2300f2fe%22 text-anchor=%22middle%22>&gt;_</text></svg>">
+
     <style>
         :root {
             --bg-color: #0b0f17;
@@ -183,8 +187,25 @@
         .tarjeta-proyecto p {
             color: var(--text-sub);
             font-size: 0.9rem;
-            margin: 0 0 1.8rem 0;
+            margin: 0 0 1.2rem 0;
             line-height: 1.5;
+        }
+
+        .tags-container {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--accent-blue);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(79, 172, 254, 0.2);
+            font-family: monospace;
         }
 
         .btn-pdf {
@@ -252,7 +273,7 @@
 
     <nav>
         <span class="nav-titulo">Portafolio de Proyectos</span>
-        <a href="URL_DE_TU_DRIVE_CV_PDF" target="_blank" class="btn-cv-nav">📥 Descargar CV (PDF)</a>
+        <a href="Sergio_Gonzalez_Garcia_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn-cv-nav" aria-label="Descargar currículum en formato PDF">📥 Descargar CV (PDF)</a>
     </nav>
 
     <main>
@@ -274,27 +295,47 @@
             <!-- Fila 1 (Linux / Windows) -->
             <div class="tarjeta-proyecto" data-sistema="Servidores Linux">
                 <h3>Servidor DHCP</h3>
-                <p>Configuración y despliegue del servicio isc-dhcp-server en Ubuntu Server 26.04. Incluye la preparación de la interfaz de red estática mediante Netplan, la declaración de autoridad del servidor y la definición detallada del pool de direccionamiento dinámico (rango, máscara, tiempos de concesión y puerta de enlace) para los clientes de la red local.</p>
-                <a href="URL_DE_TU_PDF_LINUX_DHCP" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
+                <p>Configuración y despliegue del servicio isc-dhcp-server en Ubuntu Server. Incluye la preparación de la interfaz de red estática mediante Netplan, la declaración de autoridad del servidor y la definición detallada del pool de direccionamiento dinámico para la red local.</p>
+                <div class="tags-container">
+                    <span class="tag">Ubuntu Server</span>
+                    <span class="tag">isc-dhcp-server</span>
+                    <span class="tag">Netplan</span>
+                </div>
+                <a href="URL_DE_TU_PDF_LINUX_DHCP" target="_blank" rel="noopener noreferrer" class="btn-pdf" aria-label="Ver documentación PDF de DHCP Linux">Ver Documentación (PDF)</a>
             </div>
 
             <div class="tarjeta-proyecto" data-sistema="Windows Server">
                 <h3>Servidor DHCP</h3>
-                <p>Este módulo detalla la instalación, inicio y configuración del servicio DHCP en Windows Server, incluyendo la creación y activación de ámbitos IP, establecimiento de exclusiones, configuración de tiempos de concesión y realización de reservas de red tanto para clientes Windows 10 como Xubuntu.</p>
-                <a href="URL_DE_TU_PDF_WINDOWS_DHCP" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
+                <p>Instalación, inicio y configuración del servicio DHCP en Windows Server. Creación y activación de ámbitos IP, establecimiento de exclusiones, tiempos de concesión y realización de reservas de red para clientes Windows y Linux.</p>
+                <div class="tags-container">
+                    <span class="tag">Windows Server</span>
+                    <span class="tag">DHCP Scope</span>
+                    <span class="tag">IP Reservations</span>
+                </div>
+                <a href="URL_DE_TU_PDF_WINDOWS_DHCP" target="_blank" rel="noopener noreferrer" class="btn-pdf" aria-label="Ver documentación PDF de DHCP Windows">Ver Documentación (PDF)</a>
             </div>
 
             <!-- Fila 2 (Linux / Windows) -->
             <div class="tarjeta-proyecto" data-sistema="Servidores Linux">
                 <h3>Servidor DNS con DHCP</h3>
-                <p>Implementación del servidor DNS (bind9) con la configuración detallada de sus reenviadores, la creación de las zonas de resolución directa (red.lan) e inversa (0.168.192.in-addr.arpa), y su posterior integración con el archivo de configuración de DHCP para automatizar la entrega y resolución de nombres de dominio internos en los equipos de la red.</p>
-                <a href="URL_DE_TU_PDF_LINUX_DNS" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
+                <p>Implementación del servidor DNS (BIND9) con reenviadores, zonas de resolución directa e inversa, e integración con el archivo de configuración de DHCP para automatizar la resolución de nombres internos.</p>
+                <div class="tags-container">
+                    <span class="tag">BIND9</span>
+                    <span class="tag">DNS Zones</span>
+                    <span class="tag">DHCP Integration</span>
+                </div>
+                <a href="URL_DE_TU_PDF_LINUX_DNS" target="_blank" rel="noopener noreferrer" class="btn-pdf" aria-label="Ver documentación PDF de DNS Linux">Ver Documentación (PDF)</a>
             </div>
 
             <div class="tarjeta-proyecto" data-sistema="Windows Server">
                 <h3>Servidor DNS</h3>
-                <p>Este módulo describe el proceso para agregar la característica de DNS en el servidor, abarcando la creación de una zona principal (tanto directa como inversa), la adición de nuevos hosts y alias (CNAME), y la posterior verificación del correcto funcionamiento de la resolución de nombres mediante la herramienta nslookup.</p>
-                <a href="URL_DE_TU_PDF_WINDOWS_DNS" target="_blank" class="btn-pdf">Ver Documentación (PDF)</a>
+                <p>Proceso para agregar el rol DNS en el servidor, abarcando zonas principales (directa e inversa), adición de hosts (A) y alias (CNAME), con verificación de resolución mediante nslookup.</p>
+                <div class="tags-container">
+                    <span class="tag">Windows Server</span>
+                    <span class="tag">DNS Manager</span>
+                    <span class="tag">nslookup</span>
+                </div>
+                <a href="URL_DE_TU_PDF_WINDOWS_DNS" target="_blank" rel="noopener noreferrer" class="btn-pdf" aria-label="Ver documentación PDF de DNS Windows">Ver Documentación (PDF)</a>
             </div>
 
         </div>
