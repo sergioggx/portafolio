@@ -1,337 +1,486 @@
-<style>
-    :root {
-        --bg: #080c14;
-        --surface: #111827;
-        --surface-hover: #172235;
-        --line: #263449;
-        --cyan: #22d3ee;
-        --blue: #60a5fa;
-        --text: #f8fafc;
-        --muted: #94a3b8;
-        --max-width: 1120px;
-        --radius: 14px;
-    }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#080c14">
+    <title>Portfolio de Sistemas | Sergio González</title>
 
-    *,
-    *::before,
-    *::after {
-        box-sizing: border-box;
-    }
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23080c14%22/><text x=%2250%25%22 y=%2265%25%22 font-size=%2260%22 font-family=%22monospace%22 font-weight=%22bold%22 fill=%22%2322d3ee%22 text-anchor=%22middle%22>&gt;_</text></svg>">
 
-    html {
-        scroll-behavior: smooth;
-    }
-
-    body {
-        margin: 0;
-        min-width: 320px;
-        color: var(--text);
-        background:
-            radial-gradient(circle at 10% 0%, rgba(34, 211, 238, 0.08), transparent 32rem),
-            var(--bg);
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system,
-            BlinkMacSystemFont, "Segoe UI", sans-serif;
-        line-height: 1.6;
-    }
-
-    a {
-        color: inherit;
-    }
-
-    a:focus-visible {
-        outline: 2px solid var(--cyan);
-        outline-offset: 4px;
-    }
-
-    header {
-        padding: 5rem 1rem 3.5rem;
-        text-align: center;
-        border-bottom: 1px solid var(--line);
-    }
-
-    header h1 {
-        margin: 0;
-        font-size: clamp(2rem, 5vw, 3.5rem);
-        line-height: 1.1;
-        letter-spacing: -0.06em;
-        color: var(--text);
-    }
-
-    header h1::after {
-        content: "_";
-        margin-left: 0.15em;
-        color: var(--cyan);
-    }
-
-    header p {
-        max-width: 650px;
-        margin: 1rem auto 0;
-        color: var(--muted);
-        font-size: clamp(0.95rem, 2vw, 1.1rem);
-    }
-
-    nav {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        max-width: var(--max-width);
-        min-height: 64px;
-        margin: 0 auto;
-        padding: 0.75rem 1.5rem;
-        background: rgba(8, 12, 20, 0.96);
-        border-bottom: 1px solid var(--line);
-    }
-
-    .nav-titulo {
-        color: var(--text);
-        font-size: 0.95rem;
-        font-weight: 700;
-        letter-spacing: 0.03em;
-    }
-
-    .btn-cv-nav,
-    .btn-pdf {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 42px;
-        border-radius: 8px;
-        text-decoration: none;
-        transition:
-            background-color 160ms ease,
-            border-color 160ms ease,
-            color 160ms ease,
-            transform 160ms ease;
-    }
-
-    .btn-cv-nav {
-        padding: 0.55rem 1rem;
-        color: var(--bg);
-        background: var(--cyan);
-        border: 1px solid var(--cyan);
-        font-size: 0.88rem;
-        font-weight: 700;
-    }
-
-    .btn-cv-nav:hover {
-        background: #a5f3fc;
-        border-color: #a5f3fc;
-        transform: translateY(-2px);
-    }
-
-    main {
-        width: min(var(--max-width), calc(100% - 2rem));
-        margin: 0 auto;
-        padding: 4rem 0 5rem;
-    }
-
-    .introduccion {
-        max-width: 700px;
-        margin: 0 auto 3.5rem;
-        text-align: center;
-    }
-
-    .introduccion h2 {
-        margin: 0 0 0.75rem;
-        font-size: clamp(1.6rem, 3vw, 2.2rem);
-        line-height: 1.2;
-        letter-spacing: -0.04em;
-    }
-
-    .introduccion p {
-        margin: 0;
-        color: var(--muted);
-    }
-
-    .cabeceras-sistemas {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .columna-titulo {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        padding: 0 0 0.7rem;
-        color: var(--cyan);
-        border-bottom: 1px solid var(--line);
-        font-size: 0.8rem;
-        font-weight: 800;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-    }
-
-    .columna-titulo::before {
-        content: "";
-        width: 7px;
-        height: 7px;
-        flex: 0 0 7px;
-        border-radius: 50%;
-        background: var(--cyan);
-    }
-
-    .grid-proyectos {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1.5rem;
-    }
-
-    .tarjeta-proyecto {
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
-        padding: 1.5rem;
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        content-visibility: auto;
-        contain-intrinsic-size: auto 330px;
-        transition:
-            background-color 160ms ease,
-            border-color 160ms ease,
-            transform 160ms ease;
-    }
-
-    .tarjeta-proyecto:hover {
-        background: var(--surface-hover);
-        border-color: rgba(34, 211, 238, 0.65);
-        transform: translateY(-3px);
-    }
-
-    .tarjeta-proyecto h3 {
-        margin: 0 0 0.7rem;
-        font-size: 1.15rem;
-        line-height: 1.3;
-    }
-
-    .tarjeta-proyecto p {
-        margin: 0 0 1.25rem;
-        color: var(--muted);
-        font-size: 0.92rem;
-        line-height: 1.55;
-    }
-
-    .tags-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.45rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .tag {
-        padding: 0.2rem 0.55rem;
-        color: var(--blue);
-        background: rgba(96, 165, 250, 0.08);
-        border: 1px solid rgba(96, 165, 250, 0.25);
-        border-radius: 5px;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        font-size: 0.72rem;
-    }
-
-    .btn-pdf {
-        width: 100%;
-        margin-top: auto;
-        padding: 0.65rem 1rem;
-        color: var(--text);
-        background: transparent;
-        border: 1px solid var(--line);
-        font-size: 0.86rem;
-        font-weight: 700;
-    }
-
-    .btn-pdf:hover {
-        color: var(--bg);
-        background: var(--cyan);
-        border-color: var(--cyan);
-    }
-
-    .proyecto-vacio {
-        visibility: hidden;
-    }
-
-    footer {
-        padding: 2rem 1rem;
-        color: var(--muted);
-        border-top: 1px solid var(--line);
-        text-align: center;
-        font-size: 0.85rem;
-    }
-
-    @media (max-width: 800px) {
-        nav {
-            position: static;
-        }
-
-        .cabeceras-sistemas {
-            display: none;
-        }
-
-        .grid-proyectos {
-            grid-template-columns: 1fr;
-        }
-
-        .tarjeta-proyecto::before {
-            content: attr(data-sistema);
-            margin-bottom: 0.6rem;
-            color: var(--cyan);
-            font-size: 0.72rem;
-            font-weight: 800;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .proyecto-vacio {
-            display: none;
-        }
-    }
-
-    @media (max-width: 560px) {
-        header {
-            padding: 3.5rem 1rem 2.5rem;
-        }
-
-        nav {
-            flex-direction: column;
-            align-items: stretch;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .btn-cv-nav {
-            width: 100%;
-        }
-
-        main {
-            width: min(100% - 1.25rem, var(--max-width));
-            padding-top: 2.5rem;
-        }
-
-        .grid-proyectos {
-            gap: 1rem;
-        }
-
-        .tarjeta-proyecto {
-            padding: 1.25rem;
-        }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        html {
-            scroll-behavior: auto;
+    <style>
+        :root {
+            --bg: #080c14;
+            --surface: #111827;
+            --surface-hover: #172235;
+            --line: #263449;
+            --cyan: #22d3ee;
+            --blue: #60a5fa;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --max-width: 1120px;
+            --radius: 14px;
         }
 
         *,
         *::before,
         *::after {
-            transition-duration: 0.01ms !important;
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
+            box-sizing: border-box;
         }
-    }
-</style>
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-width: 320px;
+            margin: 0;
+            color: var(--text);
+            background:
+                radial-gradient(
+                    circle at 10% 0%,
+                    rgba(34, 211, 238, 0.08),
+                    transparent 32rem
+                ),
+                var(--bg);
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        a:focus-visible {
+            outline: 2px solid var(--cyan);
+            outline-offset: 4px;
+        }
+
+        header {
+            padding: 5rem 1rem 3.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--line);
+        }
+
+        header h1 {
+            margin: 0;
+            color: var(--text);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.1;
+            letter-spacing: -0.06em;
+        }
+
+        header h1::after {
+            content: "_";
+            margin-left: 0.15em;
+            color: var(--cyan);
+        }
+
+        header p {
+            max-width: 650px;
+            margin: 1rem auto 0;
+            color: var(--muted);
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            max-width: var(--max-width);
+            min-height: 64px;
+            margin: 0 auto;
+            padding: 0.75rem 1.5rem;
+            background: rgba(8, 12, 20, 0.96);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .nav-titulo {
+            color: var(--text);
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        .btn-cv-nav,
+        .btn-pdf {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition:
+                background-color 160ms ease,
+                border-color 160ms ease,
+                color 160ms ease,
+                transform 160ms ease;
+        }
+
+        .btn-cv-nav {
+            padding: 0.55rem 1rem;
+            color: var(--bg);
+            background: var(--cyan);
+            border: 1px solid var(--cyan);
+            font-size: 0.88rem;
+            font-weight: 700;
+        }
+
+        .btn-cv-nav:hover {
+            color: var(--bg);
+            background: #a5f3fc;
+            border-color: #a5f3fc;
+            transform: translateY(-2px);
+        }
+
+        main {
+            width: min(var(--max-width), calc(100% - 2rem));
+            margin: 0 auto;
+            padding: 4rem 0 5rem;
+        }
+
+        .introduccion {
+            max-width: 700px;
+            margin: 0 auto 3.5rem;
+            text-align: center;
+        }
+
+        .introduccion h2 {
+            margin: 0 0 0.75rem;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            line-height: 1.2;
+            letter-spacing: -0.04em;
+        }
+
+        .introduccion p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .cabeceras-sistemas {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .columna-titulo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0 0 0.7rem;
+            color: var(--cyan);
+            border-bottom: 1px solid var(--line);
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .columna-titulo::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            flex: 0 0 7px;
+            border-radius: 50%;
+            background: var(--cyan);
+        }
+
+        .grid-proyectos {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tarjeta-proyecto {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            padding: 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+
+            /*
+             * Reduce el trabajo de renderizado de tarjetas
+             * que todavía están fuera de la pantalla.
+             */
+            content-visibility: auto;
+            contain-intrinsic-size: auto 330px;
+
+            transition:
+                background-color 160ms ease,
+                border-color 160ms ease,
+                transform 160ms ease;
+        }
+
+        .tarjeta-proyecto:hover {
+            background: var(--surface-hover);
+            border-color: rgba(34, 211, 238, 0.65);
+            transform: translateY(-3px);
+        }
+
+        .tarjeta-proyecto h3 {
+            margin: 0 0 0.7rem;
+            font-size: 1.15rem;
+            line-height: 1.3;
+        }
+
+        .tarjeta-proyecto p {
+            margin: 0 0 1.25rem;
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.55;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            padding: 0.2rem 0.55rem;
+            color: var(--blue);
+            background: rgba(96, 165, 250, 0.08);
+            border: 1px solid rgba(96, 165, 250, 0.25);
+            border-radius: 5px;
+            font-family:
+                ui-monospace,
+                SFMono-Regular,
+                Menlo,
+                Monaco,
+                Consolas,
+                monospace;
+            font-size: 0.72rem;
+        }
+
+        .btn-pdf {
+            width: 100%;
+            margin-top: auto;
+            padding: 0.65rem 1rem;
+            color: var(--text);
+            background: transparent;
+            border: 1px solid var(--line);
+            font-size: 0.86rem;
+            font-weight: 700;
+        }
+
+        .btn-pdf:hover {
+            color: var(--bg);
+            background: var(--cyan);
+            border-color: var(--cyan);
+        }
+
+        /*
+         * Conserva la alineación de las columnas en escritorio,
+         * pero no muestra huecos innecesarios en móvil.
+         */
+        .proyecto-vacio {
+            visibility: hidden;
+        }
+
+        footer {
+            padding: 2rem 1rem;
+            color: var(--muted);
+            border-top: 1px solid var(--line);
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 800px) {
+            nav {
+                position: static;
+            }
+
+            .cabeceras-sistemas {
+                display: none;
+            }
+
+            .grid-proyectos {
+                grid-template-columns: 1fr;
+            }
+
+            .tarjeta-proyecto::before {
+                content: attr(data-sistema);
+                display: block;
+                margin-bottom: 0.6rem;
+                color: var(--cyan);
+                font-size: 0.72rem;
+                font-weight: 800;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+            }
+
+            .proyecto-vacio {
+                display: none;
+            }
+        }
+
+        @media (max-width: 560px) {
+            header {
+                padding: 3.5rem 1rem 2.5rem;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 1rem;
+                text-align: center;
+            }
+
+            .btn-cv-nav {
+                width: 100%;
+            }
+
+            main {
+                width: min(100% - 1.25rem, var(--max-width));
+                padding-top: 2.5rem;
+            }
+
+            .grid-proyectos {
+                gap: 1rem;
+            }
+
+            .tarjeta-proyecto {
+                padding: 1.25rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Sergio GG</h1>
+        <p>
+            Administración de Sistemas Informáticos en Red |
+            Telecomunicaciones
+        </p>
+    </header>
+
+    <nav aria-label="Navegación principal">
+        <span class="nav-titulo">Portafolio de Proyectos</span>
+
+        <a
+            href="Sergio_Gonzalez_Garcia_CV.pdf"
+            download="Sergio_Gonzalez_Garcia_CV.pdf"
+            class="btn-cv-nav"
+            aria-label="Descargar currículum en formato PDF"
+        >
+            📥 Descargar CV (PDF)
+        </a>
+    </nav>
+
+    <main>
+        <section class="introduccion">
+            <h2>Proyectos de Infraestructura y Servidores</h2>
+
+            <p>
+                Repositorio de documentación técnica sobre despliegues,
+                configuraciones y administración de entornos de red.
+            </p>
+        </section>
+
+        <div class="cabeceras-sistemas">
+            <div class="columna-titulo">Servidores Linux</div>
+            <div class="columna-titulo">Windows Server</div>
+        </div>
+
+        <section class="grid-proyectos" aria-label="Proyectos">
+
+            <article class="tarjeta-proyecto" data-sistema="Servidores Linux">
+                <h3>Servidor DHCP</h3>
+
+                <p>
+                    Configuración y despliegue del servicio
+                    isc-dhcp-server en Ubuntu Server. Incluye la preparación
+                    de la interfaz de red estática mediante Netplan, la
+                    declaración de autoridad del servidor y la definición
+                    detallada del pool de direccionamiento dinámico para la
+                    red local.
+                </p>
+
+                <div class="tags-container">
+                    <span class="tag">Ubuntu Server</span>
+                    <span class="tag">isc-dhcp-server</span>
+                    <span class="tag">Netplan</span>
+                </div>
+
+                <a
+                    href="URL_DE_TU_PDF_LINUX_DHCP"
+                    download="linux-dhcp.pdf"
+                    class="btn-pdf"
+                    aria-label="Ver documentación PDF de DHCP Linux"
+                >
+                    Ver documentación (PDF)
+                </a>
+            </article>
+
+            <article class="tarjeta-proyecto" data-sistema="Windows Server">
+                <h3>Servidor DHCP</h3>
+
+                <p>
+                    Instalación, inicio y configuración del servicio DHCP en
+                    Windows Server. Creación y activación de ámbitos IP,
+                    establecimiento de exclusiones, tiempos de concesión y
+                    realización de reservas de red para clientes Windows y
+                    Linux.
+                </p>
+
+                <div class="tags-container">
+                    <span class="tag">Windows Server</span>
+                    <span class="tag">DHCP Scope</span>
+                    <span class="tag">IP Reservations</span>
+                </div>
+
+                <a
+                    href="URL_DE_TU_PDF_WINDOWS_DHCP"
+                    download="windows-dhcp.pdf"
+                    class="btn-pdf"
+                    aria-label="Ver documentación PDF de DHCP Windows"
+                >
+                    Ver documentación (PDF)
+                </a>
+            </article>
+
+            <article class="tarjeta-proyecto" data-sistema="Servidores Linux">
+                <h3>Servidor DNS con DHCP</h3>
+
+                <p>
+                    Implementación del servidor DNS (BIND9) con reenviadores,
+                    zonas de resolución directa e inversa, e integración con
+                    el archivo de configuración de DHCP para automatizar la
+                    resolución de nombres internos.
+                </p>
+
+                <div class="tags-container">
+                    <span class="tag">BIND9</span>
+                    <span
