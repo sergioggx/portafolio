@@ -25,7 +25,6 @@
             --nav-bg: rgba(8, 12, 20, 0.96);
         }
 
-        /* Variables para el Modo Claro */
         body.light-mode {
             --bg: #f8fafc;
             --surface: #ffffff;
@@ -83,9 +82,46 @@
         }
 
         header {
+            position: relative;
             padding: 5rem 1rem 3.5rem;
             text-align: center;
             border-bottom: 1px solid var(--line);
+        }
+
+        /* Botón de tema minimalista en la esquina superior derecha del header */
+        .btn-theme-minimal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            background: transparent;
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            color: var(--muted);
+            cursor: pointer;
+            transition: color 200ms ease, border-color 200ms ease, background-color 200ms ease, transform 200ms ease;
+        }
+
+        .btn-theme-minimal:hover {
+            color: var(--cyan-accent);
+            border-color: var(--cyan-accent);
+            background-color: var(--surface);
+            transform: scale(1.05);
+        }
+
+        .btn-theme-minimal svg {
+            width: 18px;
+            height: 18px;
+            stroke-width: 2;
+            stroke: currentColor;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         header h1 {
@@ -141,7 +177,6 @@
 
         .btn-cv-nav,
         .btn-linkedin-nav,
-        .btn-theme-toggle,
         .btn-pdf {
             display: inline-flex;
             align-items: center;
@@ -174,21 +209,6 @@
         .btn-cv-nav:hover,
         .btn-linkedin-nav:hover {
             opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        .btn-theme-toggle {
-            padding: 0 0.8rem;
-            background: transparent;
-            border: 1px solid var(--line);
-            color: var(--text);
-            cursor: pointer;
-            font-size: 1.1rem;
-        }
-
-        .btn-theme-toggle:hover {
-            background: var(--surface-hover);
-            border-color: var(--cyan-accent);
             transform: translateY(-2px);
         }
 
@@ -373,7 +393,12 @@
 
         @media (max-width: 560px) {
             header {
-                padding: 3.5rem 1rem 2.5rem;
+                padding: 4rem 1rem 2.5rem;
+            }
+
+            .btn-theme-minimal {
+                top: 1rem;
+                right: 1rem;
             }
 
             nav {
@@ -389,8 +414,7 @@
             }
 
             .btn-cv-nav,
-            .btn-linkedin-nav,
-            .btn-theme-toggle {
+            .btn-linkedin-nav {
                 width: 100%;
             }
 
@@ -427,6 +451,31 @@
 <body>
 
     <header>
+        <button
+            id="theme-toggle"
+            class="btn-theme-minimal"
+            aria-label="Cambiar a modo claro"
+            title="Cambiar tema"
+        >
+            <!-- SVG Sol (Visible por defecto en Modo Oscuro) -->
+            <svg id="icon-sun" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+
+            <!-- SVG Luna (Visible en Modo Claro) -->
+            <svg id="icon-moon" viewBox="0 0 24 24" style="display: none;">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+
         <h1>Sergio GG</h1>
         <p>
             Administración de Sistemas Informáticos en Red |
@@ -438,15 +487,6 @@
         <span class="nav-titulo">Portafolio de Proyectos</span>
 
         <div class="nav-acciones">
-            <button
-                id="theme-toggle"
-                class="btn-theme-toggle"
-                aria-label="Cambiar a modo claro"
-                title="Cambiar tema"
-            >
-                <span id="theme-icon">☀️</span>
-            </button>
-
             <a
                 href="https://www.linkedin.com/in/sergiogonz%C3%A1lezgarc%C3%ADa/"
                 target="_blank"
@@ -662,24 +702,32 @@
 
     <script>
         const themeToggleBtn = document.getElementById('theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
+        const iconSun = document.getElementById('icon-sun');
+        const iconMoon = document.getElementById('icon-moon');
 
-        // Leer preferencia guardada o tema del sistema
         const savedTheme = localStorage.getItem('theme');
         const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
 
-        if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
-            document.body.classList.add('light-mode');
-            themeIcon.textContent = '🌙';
-            themeToggleBtn.setAttribute('aria-label', 'Cambiar a modo oscuro');
+        function updateTheme(isLight) {
+            if (isLight) {
+                document.body.classList.add('light-mode');
+                iconSun.style.display = 'none';
+                iconMoon.style.display = 'block';
+                themeToggleBtn.setAttribute('aria-label', 'Cambiar a modo oscuro');
+            } else {
+                document.body.classList.remove('light-mode');
+                iconSun.style.display = 'block';
+                iconMoon.style.display = 'none';
+                themeToggleBtn.setAttribute('aria-label', 'Cambiar a modo claro');
+            }
         }
 
-        themeToggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('light-mode');
-            const isLight = document.body.classList.contains('light-mode');
+        const initialLight = savedTheme === 'light' || (!savedTheme && prefersLight);
+        updateTheme(initialLight);
 
-            themeIcon.textContent = isLight ? '🌙' : '☀️';
-            themeToggleBtn.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+        themeToggleBtn.addEventListener('click', () => {
+            const isLight = !document.body.classList.contains('light-mode');
+            updateTheme(isLight);
             localStorage.setItem('theme', isLight ? 'light' : 'dark');
         });
     </script>
