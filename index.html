@@ -21,6 +21,7 @@
             --muted: #94a3b8;
             --max-width: 1120px;
             --radius: 14px;
+            --linkedin: #0a66c2;
         }
 
         *,
@@ -114,7 +115,14 @@
             letter-spacing: 0.03em;
         }
 
+        .nav-acciones {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
         .btn-cv-nav,
+        .btn-linkedin-nav,
         .btn-pdf {
             display: inline-flex;
             align-items: center;
@@ -142,6 +150,22 @@
             color: var(--bg);
             background: #a5f3fc;
             border-color: #a5f3fc;
+            transform: translateY(-2px);
+        }
+
+        .btn-linkedin-nav {
+            padding: 0.55rem 1rem;
+            color: #ffffff;
+            background: var(--linkedin);
+            border: 1px solid var(--linkedin);
+            font-size: 0.88rem;
+            font-weight: 700;
+        }
+
+        .btn-linkedin-nav:hover {
+            color: #ffffff;
+            background: #084e96;
+            border-color: #084e96;
             transform: translateY(-2px);
         }
 
@@ -212,14 +236,8 @@
             background: var(--surface);
             border: 1px solid var(--line);
             border-radius: var(--radius);
-
-            /*
-             * Reduce el trabajo de renderizado de tarjetas
-             * que todavía están fuera de la pantalla.
-             */
             content-visibility: auto;
             contain-intrinsic-size: auto 330px;
-
             transition:
                 background-color 160ms ease,
                 border-color 160ms ease,
@@ -285,10 +303,6 @@
             border-color: var(--cyan);
         }
 
-        /*
-         * Conserva la alineación de las columnas en escritorio,
-         * pero no muestra huecos innecesarios en móvil.
-         */
         .proyecto-vacio {
             visibility: hidden;
         }
@@ -342,7 +356,13 @@
                 text-align: center;
             }
 
-            .btn-cv-nav {
+            .nav-acciones {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-cv-nav,
+            .btn-linkedin-nav {
                 width: 100%;
             }
 
@@ -389,14 +409,26 @@
     <nav aria-label="Navegación principal">
         <span class="nav-titulo">Portafolio de Proyectos</span>
 
-        <a
-            href="Sergio_Gonzalez_Garcia_CV.pdf"
-            download="Sergio_Gonzalez_Garcia_CV.pdf"
-            class="btn-cv-nav"
-            aria-label="Descargar currículum en formato PDF"
-        >
-            Descargar CV (PDF)
-        </a>
+        <div class="nav-acciones">
+            <a
+                href="https://www.linkedin.com/in/sergiogonz%C3%A1lezgarc%C3%ADa/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-linkedin-nav"
+                aria-label="Perfil de LinkedIn de Sergio González"
+            >
+                LinkedIn
+            </a>
+
+            <a
+                href="Sergio_Gonzalez_Garcia_CV.pdf"
+                download="Sergio_Gonzalez_Garcia_CV.pdf"
+                class="btn-cv-nav"
+                aria-label="Descargar currículum en formato PDF"
+            >
+                Descargar CV (PDF)
+            </a>
+        </div>
     </nav>
 
     <main>
