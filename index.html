@@ -15,12 +15,28 @@
             --surface: #111827;
             --surface-hover: #172235;
             --line: #263449;
-            --cyan: #22d3ee;
+            --cyan: #0891b2;
+            --cyan-accent: #22d3ee;
             --blue: #60a5fa;
             --text: #f8fafc;
             --muted: #94a3b8;
             --max-width: 1120px;
             --radius: 14px;
+            --nav-bg: rgba(8, 12, 20, 0.96);
+        }
+
+        /* Variables para el Modo Claro */
+        body.light-mode {
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --surface-hover: #f1f5f9;
+            --line: #e2e8f0;
+            --cyan: #0284c7;
+            --cyan-accent: #0284c7;
+            --blue: #2563eb;
+            --text: #0f172a;
+            --muted: #64748b;
+            --nav-bg: rgba(248, 250, 252, 0.96);
         }
 
         *,
@@ -53,14 +69,16 @@
                 "Segoe UI",
                 sans-serif;
             line-height: 1.6;
+            transition: background-color 300ms ease, color 300ms ease;
         }
 
         a {
             color: inherit;
         }
 
-        a:focus-visible {
-            outline: 2px solid var(--cyan);
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--cyan-accent);
             outline-offset: 4px;
         }
 
@@ -81,7 +99,7 @@
         header h1::after {
             content: "_";
             margin-left: 0.15em;
-            color: var(--cyan);
+            color: var(--cyan-accent);
         }
 
         header p {
@@ -103,8 +121,9 @@
             min-height: 64px;
             margin: 0 auto;
             padding: 0.75rem 1.5rem;
-            background: rgba(8, 12, 20, 0.96);
+            background: var(--nav-bg);
             border-bottom: 1px solid var(--line);
+            transition: background-color 300ms ease, border-color 300ms ease;
         }
 
         .nav-titulo {
@@ -122,6 +141,7 @@
 
         .btn-cv-nav,
         .btn-linkedin-nav,
+        .btn-theme-toggle,
         .btn-pdf {
             display: inline-flex;
             align-items: center;
@@ -139,18 +159,36 @@
         .btn-cv-nav,
         .btn-linkedin-nav {
             padding: 0.55rem 1rem;
-            color: var(--bg);
-            background: var(--cyan);
-            border: 1px solid var(--cyan);
+            color: #ffffff;
+            background: var(--cyan-accent);
+            border: 1px solid var(--cyan-accent);
             font-size: 0.88rem;
             font-weight: 700;
         }
 
+        body:not(.light-mode) .btn-cv-nav,
+        body:not(.light-mode) .btn-linkedin-nav {
+            color: #080c14;
+        }
+
         .btn-cv-nav:hover,
         .btn-linkedin-nav:hover {
-            color: var(--bg);
-            background: #a5f3fc;
-            border-color: #a5f3fc;
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-theme-toggle {
+            padding: 0 0.8rem;
+            background: transparent;
+            border: 1px solid var(--line);
+            color: var(--text);
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn-theme-toggle:hover {
+            background: var(--surface-hover);
+            border-color: var(--cyan-accent);
             transform: translateY(-2px);
         }
 
@@ -190,7 +228,7 @@
             align-items: center;
             gap: 0.6rem;
             padding: 0 0 0.7rem;
-            color: var(--cyan);
+            color: var(--cyan-accent);
             border-bottom: 1px solid var(--line);
             font-size: 0.8rem;
             font-weight: 800;
@@ -204,7 +242,7 @@
             height: 7px;
             flex: 0 0 7px;
             border-radius: 50%;
-            background: var(--cyan);
+            background: var(--cyan-accent);
         }
 
         .grid-proyectos {
@@ -231,7 +269,7 @@
 
         .tarjeta-proyecto:hover {
             background: var(--surface-hover);
-            border-color: rgba(34, 211, 238, 0.65);
+            border-color: var(--cyan-accent);
             transform: translateY(-3px);
         }
 
@@ -258,7 +296,7 @@
         .tag {
             padding: 0.2rem 0.55rem;
             color: var(--blue);
-            background: rgba(96, 165, 250, 0.08);
+            background: rgba(96, 165, 250, 0.1);
             border: 1px solid rgba(96, 165, 250, 0.25);
             border-radius: 5px;
             font-family:
@@ -283,9 +321,13 @@
         }
 
         .btn-pdf:hover {
-            color: var(--bg);
-            background: var(--cyan);
-            border-color: var(--cyan);
+            color: #ffffff;
+            background: var(--cyan-accent);
+            border-color: var(--cyan-accent);
+        }
+
+        body:not(.light-mode) .btn-pdf:hover {
+            color: #080c14;
         }
 
         .proyecto-vacio {
@@ -317,7 +359,7 @@
                 content: attr(data-sistema);
                 display: block;
                 margin-bottom: 0.6rem;
-                color: var(--cyan);
+                color: var(--cyan-accent);
                 font-size: 0.72rem;
                 font-weight: 800;
                 letter-spacing: 0.1em;
@@ -347,7 +389,8 @@
             }
 
             .btn-cv-nav,
-            .btn-linkedin-nav {
+            .btn-linkedin-nav,
+            .btn-theme-toggle {
                 width: 100%;
             }
 
@@ -395,6 +438,15 @@
         <span class="nav-titulo">Portafolio de Proyectos</span>
 
         <div class="nav-acciones">
+            <button
+                id="theme-toggle"
+                class="btn-theme-toggle"
+                aria-label="Cambiar a modo claro"
+                title="Cambiar tema"
+            >
+                <span id="theme-icon">☀️</span>
+            </button>
+
             <a
                 href="https://www.linkedin.com/in/sergiogonz%C3%A1lezgarc%C3%ADa/"
                 target="_blank"
@@ -607,6 +659,30 @@
             Portfolio Profesional
         </p>
     </footer>
+
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        // Leer preferencia guardada o tema del sistema
+        const savedTheme = localStorage.getItem('theme');
+        const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+        if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+            document.body.classList.add('light-mode');
+            themeIcon.textContent = '🌙';
+            themeToggleBtn.setAttribute('aria-label', 'Cambiar a modo oscuro');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+
+            themeIcon.textContent = isLight ? '🌙' : '☀️';
+            themeToggleBtn.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+    </script>
 
 </body>
 </html>
