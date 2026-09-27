@@ -425,7 +425,7 @@
             background: var(--bg);
         }
 
-        .modal-body embed {
+        .modal-body iframe {
             width: 100%;
             height: 100%;
             border: none;
@@ -572,7 +572,7 @@
                 LinkedIn
             </a>
 
-            <!-- EL CV SÍ TIENE DESCARGA LIBRE USANDO EL ARCHIVO REAL -->
+            <!-- El CV se descarga libremente -->
             <a
                 href="Sergio_Gonzalez_Garcia_CV.pdf"
                 download="Sergio_Gonzalez_Garcia_CV.pdf"
@@ -611,12 +611,12 @@
                     <span class="tag">isc-dhcp-server</span>
                     <span class="tag">Netplan</span>
                 </div>
-                <button class="btn-pdf btn-ver-doc" data-pdf="URL_DE_TU_PDF_LINUX_DHCP" data-titulo="Servidor DHCP - Linux">
-                    Ver documentación (Protegida)
+                <button class="btn-pdf btn-ver-doc" data-pdf="archivo_ejemplo_linux.pdf" data-titulo="Servidor DHCP - Linux">
+                    Ver documentación
                 </button>
             </article>
 
-            <!-- WINDOWS SERVER DHCP (Conlazado a tu archivo real 'WS DHCP.pdf') -->
+            <!-- WINDOWS SERVER DHCP (Conectado directamente a tu archivo local en la misma raíz) -->
             <article class="tarjeta-proyecto" data-sistema="Windows Server">
                 <h3>Servidor DHCP</h3>
                 <p>
@@ -628,7 +628,7 @@
                     <span class="tag">IP Reservations</span>
                 </div>
                 <button class="btn-pdf btn-ver-doc" data-pdf="WS DHCP.pdf" data-titulo="Servidor DHCP - Windows Server">
-                    Ver documentación (Protegida)
+                    Ver documentación
                 </button>
             </article>
 
@@ -643,12 +643,12 @@
                     <span class="tag">DNS Zones</span>
                     <span class="tag">DHCP Integration</span>
                 </div>
-                <button class="btn-pdf btn-ver-doc" data-pdf="URL_DE_TU_PDF_LINUX_DNS" data-titulo="Servidor DNS con DHCP - Linux">
-                    Ver documentación (Protegida)
+                <button class="btn-pdf btn-ver-doc" data-pdf="archivo_ejemplo_dns.pdf" data-titulo="Servidor DNS con DHCP - Linux">
+                    Ver documentación
                 </button>
             </article>
 
-            <!-- WINDOWS SERVER DNS (Enlaces a tu archivo real 'WS DNS.pdf') -->
+            <!-- WINDOWS SERVER DNS (Conectado directamente a tu archivo local 'WS DNS.pdf') -->
             <article class="tarjeta-proyecto" data-sistema="Windows Server">
                 <h3>Servidor DNS</h3>
                 <p>
@@ -660,7 +660,7 @@
                     <span class="tag">nslookup</span>
                 </div>
                 <button class="btn-pdf btn-ver-doc" data-pdf="WS DNS.pdf" data-titulo="Servidor DNS - Windows Server">
-                    Ver documentación (Protegida)
+                    Ver documentación
                 </button>
             </article>
 
@@ -675,14 +675,14 @@
                     <span class="tag">Dovecot</span>
                     <span class="tag">Ubuntu Server</span>
                 </div>
-                <button class="btn-pdf btn-ver-doc" data-pdf="URL_DE_TU_PDF_LINUX_CORREO" data-titulo="Servidor de Correo - Linux">
-                    Ver documentación (Protegida)
+                <button class="btn-pdf btn-ver-doc" data-pdf="archivo_ejemplo_correo.pdf" data-titulo="Servidor de Correo - Linux">
+                    Ver documentación
                 </button>
             </article>
 
             <div class="proyecto-vacio" aria-hidden="true"></div>
 
-            <!-- OSTICKET / DOMINIO (Puedes usar 'WS DOMINIO.pdf' aquí o donde prefieras) -->
+            <!-- OSTICKET / DOMINIO (Conectado a tu archivo local 'WS DOMINIO.pdf') -->
             <article class="tarjeta-proyecto" data-sistema="Servidores Linux">
                 <h3>Sistema de Tickets (osTicket)</h3>
                 <p>
@@ -694,7 +694,7 @@
                     <span class="tag">Ubuntu Server</span>
                 </div>
                 <button class="btn-pdf btn-ver-doc" data-pdf="WS DOMINIO.pdf" data-titulo="Sistema de Tickets osTicket - Linux">
-                    Ver documentación (Protegida)
+                    Ver documentación
                 </button>
             </article>
 
@@ -703,7 +703,7 @@
         </section>
     </main>
 
-    <!-- VENTANA MODAL PARA MOSTRAR LA DOCUMENTACIÓN SIN DESCARGA -->
+    <!-- VENTANA MODAL PARA VISUALIZAR LOS PDF EN EL NAVEGADOR -->
     <div id="modalVisor" class="modal-visor" aria-hidden="true">
         <div class="modal-contenido">
             <div class="modal-header">
@@ -711,7 +711,7 @@
                 <button id="btnCerrarModal" class="btn-cerrar-modal" aria-label="Cerrar visor">&times;</button>
             </div>
             <div class="modal-body" id="modalBodyContainer">
-                <!-- El visor embed con parámetros de bloqueo se inyectará aquí -->
+                <!-- Se inyecta el iframe del visor web integrado -->
             </div>
         </div>
     </div>
@@ -766,7 +766,10 @@
                 const tituloDoc = btn.getAttribute('data-titulo');
 
                 modalTitulo.textContent = tituloDoc;
-                modalBodyContainer.innerHTML = `<embed src="${pdfUrl}#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" />`;
+                
+                // Usamos un iframe con el visor interno del navegador o un visor web compatible
+                // Añadimos parámetros para minimizar controles de descarga visibles
+                modalBodyContainer.innerHTML = `<iframe src="${pdfUrl}#toolbar=0&navpanes=0&scrollbar=0" title="${tituloDoc}"></iframe>`;
                 
                 modalVisor.style.display = 'flex';
                 modalVisor.setAttribute('aria-hidden', 'false');
