@@ -88,7 +88,6 @@
             border-bottom: 1px solid var(--line);
         }
 
-        /* Botón de tema minimalista en la esquina superior derecha del header */
         .btn-theme-minimal {
             position: absolute;
             top: 1.5rem;
@@ -184,6 +183,7 @@
             min-height: 42px;
             border-radius: 8px;
             text-decoration: none;
+            cursor: pointer;
             transition:
                 background-color 160ms ease,
                 border-color 160ms ease,
@@ -338,6 +338,7 @@
             border: 1px solid var(--line);
             font-size: 0.86rem;
             font-weight: 700;
+            text-align: center;
         }
 
         .btn-pdf:hover {
@@ -352,6 +353,82 @@
 
         .proyecto-vacio {
             visibility: hidden;
+        }
+
+        /* Estilos para el modal del visor protegido */
+        .modal-visor {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            inset: 0;
+            background: rgba(8, 12, 20, 0.85);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .modal-contenido {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 85vh;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--line);
+            background: var(--bg);
+        }
+
+        .modal-header h4 {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--text);
+        }
+
+        .btn-cerrar-modal {
+            background: transparent;
+            border: 1px solid var(--line);
+            color: var(--muted);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: all 200ms ease;
+        }
+
+        .btn-cerrar-modal:hover {
+            background: var(--cyan-accent);
+            color: #080c14;
+            border-color: var(--cyan-accent);
+        }
+
+        .modal-body {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+        }
+
+        .modal-body embed {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         footer {
@@ -457,7 +534,6 @@
             aria-label="Cambiar a modo claro"
             title="Cambiar tema"
         >
-            <!-- SVG Sol (Visible por defecto en Modo Oscuro) -->
             <svg id="icon-sun" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="5"></circle>
                 <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -470,7 +546,6 @@
                 <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
             </svg>
 
-            <!-- SVG Luna (Visible en Modo Claro) -->
             <svg id="icon-moon" viewBox="0 0 24 24" style="display: none;">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
@@ -497,6 +572,7 @@
                 LinkedIn
             </a>
 
+            <!-- EL CV SÍ TIENE DESCARGA LIBRE USANDO EL ARCHIVO REAL -->
             <a
                 href="Sergio_Gonzalez_Garcia_CV.pdf"
                 download="Sergio_Gonzalez_Garcia_CV.pdf"
@@ -511,7 +587,6 @@
     <main>
         <section class="introduccion">
             <h2>Proyectos de Infraestructura y Servidores</h2>
-
             <p>
                 Repositorio de documentación técnica sobre despliegues,
                 configuraciones y administración de entornos de red.
@@ -525,173 +600,121 @@
 
         <section class="grid-proyectos" aria-label="Proyectos">
 
+            <!-- LINUX DHCP -->
             <article class="tarjeta-proyecto" data-sistema="Servidores Linux">
                 <h3>Servidor DHCP</h3>
-
                 <p>
-                    Configuración y despliegue del servicio
-                    isc-dhcp-server en Ubuntu Server. Incluye la preparación
-                    de la interfaz de red estática mediante Netplan, la
-                    declaración de autoridad del servidor y la definición
-                    detallada del pool de direccionamiento dinámico para la
-                    red local.
+                    Configuración y despliegue del servicio isc-dhcp-server en Ubuntu Server. Incluye la preparación de la interfaz de red estática mediante Netplan, la declaración de autoridad del servidor y la definición detallada del pool de direccionamiento dinámico para la red local.
                 </p>
-
                 <div class="tags-container">
                     <span class="tag">Ubuntu Server</span>
                     <span class="tag">isc-dhcp-server</span>
                     <span class="tag">Netplan</span>
                 </div>
-
-                <a
-                    href="URL_DE_TU_PDF_LINUX_DHCP"
-                    download="linux-dhcp.pdf"
-                    class="btn-pdf"
-                    aria-label="Ver documentación PDF de DHCP Linux"
-                >
-                    Ver documentación (PDF)
-                </a>
+                <button class="btn-pdf btn-ver-doc" data-pdf="URL_DE_TU_PDF_LINUX_DHCP" data-titulo="Servidor DHCP - Linux">
+                    Ver documentación (Protegida)
+                </button>
             </article>
 
+            <!-- WINDOWS SERVER DHCP (Conlazado a tu archivo real 'WS DHCP.pdf') -->
             <article class="tarjeta-proyecto" data-sistema="Windows Server">
                 <h3>Servidor DHCP</h3>
-
                 <p>
-                    Instalación, inicio y configuración del servicio DHCP en
-                    Windows Server. Creación y activación de ámbitos IP,
-                    establecimiento de exclusiones, tiempos de concesión y
-                    realización de reservas de red para clientes Windows y
-                    Linux.
+                    Instalación, inicio y configuración del servicio DHCP en Windows Server. Creación y activación de ámbitos IP, establecimiento de exclusiones, tiempos de concesión y realización de reservas de red para clientes Windows y Linux.
                 </p>
-
                 <div class="tags-container">
                     <span class="tag">Windows Server</span>
                     <span class="tag">DHCP Scope</span>
                     <span class="tag">IP Reservations</span>
                 </div>
-
-                <a
-                    href="URL_DE_TU_PDF_WINDOWS_DHCP"
-                    download="windows-dhcp.pdf"
-                    class="btn-pdf"
-                    aria-label="Ver documentación PDF de DHCP Windows"
-                >
-                    Ver documentación (PDF)
-                </a>
+                <button class="btn-pdf btn-ver-doc" data-pdf="WS DHCP.pdf" data-titulo="Servidor DHCP - Windows Server">
+                    Ver documentación (Protegida)
+                </button>
             </article>
 
+            <!-- LINUX DNS -->
             <article class="tarjeta-proyecto" data-sistema="Servidores Linux">
                 <h3>Servidor DNS con DHCP</h3>
-
                 <p>
-                    Implementación del servidor DNS (BIND9) con reenviadores,
-                    zonas de resolución directa e inversa, e integración con
-                    el archivo de configuración de DHCP para automatizar la
-                    resolución de nombres internos.
+                    Implementación del servidor DNS (BIND9) con reenviadores, zonas de resolución directa e inversa, e integración con el archivo de configuración de DHCP para automatizar la resolución de nombres internos.
                 </p>
-
                 <div class="tags-container">
                     <span class="tag">BIND9</span>
                     <span class="tag">DNS Zones</span>
                     <span class="tag">DHCP Integration</span>
                 </div>
-
-                <a
-                    href="URL_DE_TU_PDF_LINUX_DNS"
-                    download="linux-dns.pdf"
-                    class="btn-pdf"
-                    aria-label="Ver documentación PDF de DNS Linux"
-                >
-                    Ver documentación (PDF)
-                </a>
+                <button class="btn-pdf btn-ver-doc" data-pdf="URL_DE_TU_PDF_LINUX_DNS" data-titulo="Servidor DNS con DHCP - Linux">
+                    Ver documentación (Protegida)
+                </button>
             </article>
 
+            <!-- WINDOWS SERVER DNS (Enlaces a tu archivo real 'WS DNS.pdf') -->
             <article class="tarjeta-proyecto" data-sistema="Windows Server">
                 <h3>Servidor DNS</h3>
-
                 <p>
-                    Proceso para agregar el rol DNS en el servidor, abarcando
-                    zonas principales, directa e inversa, adición de hosts
-                    (A) y alias (CNAME), con verificación de resolución
-                    mediante nslookup.
+                    Proceso para agregar el rol DNS en el servidor, abarcando zonas principales, directa e inversa, adición de hosts (A) y alias (CNAME), con verificación de resolución mediante nslookup.
                 </p>
-
                 <div class="tags-container">
                     <span class="tag">Windows Server</span>
                     <span class="tag">DNS Manager</span>
                     <span class="tag">nslookup</span>
                 </div>
-
-                <a
-                    href="URL_DE_TU_PDF_WINDOWS_DNS"
-                    download="windows-dns.pdf"
-                    class="btn-pdf"
-                    aria-label="Ver documentación PDF de DNS Windows"
-                >
-                    Ver documentación (PDF)
-                </a>
+                <button class="btn-pdf btn-ver-doc" data-pdf="WS DNS.pdf" data-titulo="Servidor DNS - Windows Server">
+                    Ver documentación (Protegida)
+                </button>
             </article>
 
+            <!-- LINUX CORREO -->
             <article class="tarjeta-proyecto" data-sistema="Servidores Linux">
                 <h3>Servidor de Correo</h3>
-
                 <p>
-                    Despliegue e integración de un entorno completo de correo
-                    electrónico en Ubuntu Server utilizando Postfix como MTA
-                    y Dovecot como servidor IMAP/POP3. Incluye la configuración
-                    de dominios virtuales, autenticación segura y pruebas de
-                    envío y recepción de correo.
+                    Despliegue e integración de un entorno completo de correo electrónico en Ubuntu Server utilizando Postfix como MTA y Dovecot como servidor IMAP/POP3. Incluye la configuración de dominios virtuales, autenticación segura y pruebas de envío y recepción de correo.
                 </p>
-
                 <div class="tags-container">
                     <span class="tag">Postfix</span>
                     <span class="tag">Dovecot</span>
                     <span class="tag">Ubuntu Server</span>
                 </div>
-
-                <a
-                    href="URL_DE_TU_PDF_LINUX_CORREO"
-                    download="linux-correo.pdf"
-                    class="btn-pdf"
-                    aria-label="Ver documentación PDF del servidor de correo Linux"
-                >
-                    Ver documentación (PDF)
-                </a>
+                <button class="btn-pdf btn-ver-doc" data-pdf="URL_DE_TU_PDF_LINUX_CORREO" data-titulo="Servidor de Correo - Linux">
+                    Ver documentación (Protegida)
+                </button>
             </article>
 
             <div class="proyecto-vacio" aria-hidden="true"></div>
 
+            <!-- OSTICKET / DOMINIO (Puedes usar 'WS DOMINIO.pdf' aquí o donde prefieras) -->
             <article class="tarjeta-proyecto" data-sistema="Servidores Linux">
                 <h3>Sistema de Tickets (osTicket)</h3>
-
                 <p>
-                    Despliegue y configuración de un sistema de soporte y
-                    gestión de incidencias Helpdesk basado en osTicket sobre
-                    pila LAMP en Ubuntu Server. Incluye departamentos, roles
-                    de agente, reglas de enrutamiento automático y correo
-                    SMTP/IMAP.
+                    Despliegue y configuración de un sistema de soporte y gestión de incidencias Helpdesk basado en osTicket sobre pila LAMP en Ubuntu Server. Incluye departamentos, roles de agente, reglas de enrutamiento automático y correo SMTP/IMAP.
                 </p>
-
                 <div class="tags-container">
                     <span class="tag">osTicket</span>
                     <span class="tag">LAMP Stack</span>
                     <span class="tag">Ubuntu Server</span>
                 </div>
-
-                <a
-                    href="URL_DE_TU_PDF_OSTICKET.pdf"
-                    download="osticket.pdf"
-                    class="btn-pdf"
-                    aria-label="Ver documentación PDF de osTicket en Ubuntu Server"
-                >
-                    Ver documentación (PDF)
-                </a>
+                <button class="btn-pdf btn-ver-doc" data-pdf="WS DOMINIO.pdf" data-titulo="Sistema de Tickets osTicket - Linux">
+                    Ver documentación (Protegida)
+                </button>
             </article>
 
             <div class="proyecto-vacio" aria-hidden="true"></div>
 
         </section>
     </main>
+
+    <!-- VENTANA MODAL PARA MOSTRAR LA DOCUMENTACIÓN SIN DESCARGA -->
+    <div id="modalVisor" class="modal-visor" aria-hidden="true">
+        <div class="modal-contenido">
+            <div class="modal-header">
+                <h4 id="modalTitulo">Documentación Técnica</h4>
+                <button id="btnCerrarModal" class="btn-cerrar-modal" aria-label="Cerrar visor">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBodyContainer">
+                <!-- El visor embed con parámetros de bloqueo se inyectará aquí -->
+            </div>
+        </div>
+    </div>
 
     <footer>
         <p>
@@ -729,6 +752,45 @@
             const isLight = !document.body.classList.contains('light-mode');
             updateTheme(isLight);
             localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+
+        const modalVisor = document.getElementById('modalVisor');
+        const modalTitulo = document.getElementById('modalTitulo');
+        const modalBodyContainer = document.getElementById('modalBodyContainer');
+        const btnCerrarModal = document.getElementById('btnCerrarModal');
+        const botonesVerDoc = document.querySelectorAll('.btn-ver-doc');
+
+        botonesVerDoc.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const pdfUrl = btn.getAttribute('data-pdf');
+                const tituloDoc = btn.getAttribute('data-titulo');
+
+                modalTitulo.textContent = tituloDoc;
+                modalBodyContainer.innerHTML = `<embed src="${pdfUrl}#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" />`;
+                
+                modalVisor.style.display = 'flex';
+                modalVisor.setAttribute('aria-hidden', 'false');
+            });
+        });
+
+        function cerrarModalFunc() {
+            modalVisor.style.display = 'none';
+            modalVisor.setAttribute('aria-hidden', 'true');
+            modalBodyContainer.innerHTML = '';
+        }
+
+        btnCerrarModal.addEventListener('click', cerrarModalFunc);
+
+        modalVisor.addEventListener('click', (e) => {
+            if (e.target === modalVisor) {
+                cerrarModalFunc();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalVisor.style.display === 'flex') {
+                cerrarModalFunc();
+            }
         });
     </script>
 
