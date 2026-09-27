@@ -355,7 +355,7 @@
             visibility: hidden;
         }
 
-        /* Estilos para el modal con visor PDF.js */
+        /* Estilos para el modal */
         .modal-visor {
             display: none;
             position: fixed;
@@ -426,7 +426,6 @@
             background: var(--bg);
         }
 
-        /* Iframe apuntando al visor externo de PDF.js configurado sin barra de herramientas */
         .modal-body iframe {
             width: 100%;
             height: 100%;
@@ -445,15 +444,12 @@
             nav {
                 position: static;
             }
-
             .cabeceras-sistemas {
                 display: none;
             }
-
             .grid-proyectos {
                 grid-template-columns: 1fr;
             }
-
             .tarjeta-proyecto::before {
                 content: attr(data-sistema);
                 display: block;
@@ -464,7 +460,6 @@
                 letter-spacing: 0.1em;
                 text-transform: uppercase;
             }
-
             .proyecto-vacio {
                 display: none;
             }
@@ -474,54 +469,33 @@
             header {
                 padding: 4rem 1rem 2.5rem;
             }
-
             .btn-theme-minimal {
                 top: 1rem;
                 right: 1rem;
             }
-
             nav {
                 flex-direction: column;
                 align-items: stretch;
                 padding: 1rem;
                 text-align: center;
             }
-
             .nav-acciones {
                 flex-direction: column;
                 width: 100%;
             }
-
             .btn-cv-nav,
             .btn-linkedin-nav {
                 width: 100%;
             }
-
             main {
                 width: min(100% - 1.25rem, var(--max-width));
                 padding-top: 2.5rem;
             }
-
             .grid-proyectos {
                 gap: 1rem;
             }
-
             .tarjeta-proyecto {
                 padding: 1.25rem;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -601,7 +575,7 @@
 
         <section class="grid-proyectos" aria-label="Proyectos">
 
-            <!-- LINUX DHCP -->
+            <!-- LINUX DHCP (Asegúrate de quitar los espacios en los nombres de tus archivos reales o usar guiones) -->
             <article class="tarjeta-proyecto" data-sistema="Servidores Linux">
                 <h3>Servidor DHCP</h3>
                 <p>
@@ -612,7 +586,7 @@
                     <span class="tag">isc-dhcp-server</span>
                     <span class="tag">Netplan</span>
                 </div>
-                <button class="btn-pdf btn-ver-doc" data-pdf="archivo_ejemplo_linux.pdf" data-titulo="Servidor DHCP - Linux">
+                <button class="btn-pdf btn-ver-doc" data-pdf="linux-dhcp.pdf" data-titulo="Servidor DHCP - Linux">
                     Ver documentación
                 </button>
             </article>
@@ -628,7 +602,7 @@
                     <span class="tag">DHCP Scope</span>
                     <span class="tag">IP Reservations</span>
                 </div>
-                <button class="btn-pdf btn-ver-doc" data-pdf="WS DHCP.pdf" data-titulo="Servidor DHCP - Windows Server">
+                <button class="btn-pdf btn-ver-doc" data-pdf="ws-dhcp.pdf" data-titulo="Servidor DHCP - Windows Server">
                     Ver documentación
                 </button>
             </article>
@@ -644,7 +618,7 @@
                     <span class="tag">DNS Zones</span>
                     <span class="tag">DHCP Integration</span>
                 </div>
-                <button class="btn-pdf btn-ver-doc" data-pdf="archivo_ejemplo_dns.pdf" data-titulo="Servidor DNS con DHCP - Linux">
+                <button class="btn-pdf btn-ver-doc" data-pdf="linux-dns.pdf" data-titulo="Servidor DNS con DHCP - Linux">
                     Ver documentación
                 </button>
             </article>
@@ -660,7 +634,7 @@
                     <span class="tag">DNS Manager</span>
                     <span class="tag">nslookup</span>
                 </div>
-                <button class="btn-pdf btn-ver-doc" data-pdf="WS DNS.pdf" data-titulo="Servidor DNS - Windows Server">
+                <button class="btn-pdf btn-ver-doc" data-pdf="ws-dns.pdf" data-titulo="Servidor DNS - Windows Server">
                     Ver documentación
                 </button>
             </article>
@@ -676,14 +650,14 @@
                     <span class="tag">Dovecot</span>
                     <span class="tag">Ubuntu Server</span>
                 </div>
-                <button class="btn-pdf btn-ver-doc" data-pdf="archivo_ejemplo_correo.pdf" data-titulo="Servidor de Correo - Linux">
+                <button class="btn-pdf btn-ver-doc" data-pdf="linux-correo.pdf" data-titulo="Servidor de Correo - Linux">
                     Ver documentación
                 </button>
             </article>
 
             <div class="proyecto-vacio" aria-hidden="true"></div>
 
-            <!-- OSTICKET / DOMINIO -->
+            <!-- WINDOWS DOMINIO -->
             <article class="tarjeta-proyecto" data-sistema="Servidores Linux">
                 <h3>Sistema de Tickets (osTicket)</h3>
                 <p>
@@ -694,7 +668,7 @@
                     <span class="tag">LAMP Stack</span>
                     <span class="tag">Ubuntu Server</span>
                 </div>
-                <button class="btn-pdf btn-ver-doc" data-pdf="WS DOMINIO.pdf" data-titulo="Sistema de Tickets osTicket - Linux">
+                <button class="btn-pdf btn-ver-doc" data-pdf="ws-dominio.pdf" data-titulo="Sistema de Tickets osTicket - Linux">
                     Ver documentación
                 </button>
             </article>
@@ -704,7 +678,7 @@
         </section>
     </main>
 
-    <!-- VENTANA MODAL CON VISOR PDF.JS EXTERNO RESTRINGIDO -->
+    <!-- VENTANA MODAL PARA EL PDF -->
     <div id="modalVisor" class="modal-visor" aria-hidden="true">
         <div class="modal-contenido">
             <div class="modal-header">
@@ -712,7 +686,7 @@
                 <button id="btnCerrarModal" class="btn-cerrar-modal" aria-label="Cerrar visor">&times;</button>
             </div>
             <div class="modal-body" id="modalBodyContainer">
-                <!-- Se inyecta el visor externo seguro configurado para ocultar botones -->
+                <!-- Se inyecta el iframe nativo optimizado sin barra de herramientas flotante -->
             </div>
         </div>
     </div>
@@ -768,11 +742,8 @@
 
                 modalTitulo.textContent = tituloDoc;
                 
-                // Usamos el visor web de PDF.js mediante un CDN seguro, pasando el archivo mediante el parámetro 'file'
-                // Los parámetros adicionales ocultan controles de descarga y barra lateral innecesaria
-                const visorUrl = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(pdfUrl)}#pagemode=none`;
-
-                modalBodyContainer.innerHTML = `<iframe src="${visorUrl}" title="${tituloDoc}"></iframe>`;
+                // Usamos parámetros de la URL del navegador para ocultar la barra lateral y herramientas por defecto (#toolbar=0)
+                modalBodyContainer.innerHTML = `<iframe src="${pdfUrl}#toolbar=0&navpanes=0" title="${tituloDoc}"></iframe>`;
                 
                 modalVisor.style.display = 'flex';
                 modalVisor.setAttribute('aria-hidden', 'false');
@@ -793,7 +764,6 @@
             }
         });
 
-        // Bloquear atajos de teclado de guardado/impresión
         document.addEventListener('keydown', (e) => {
             if (modalVisor.style.display === 'flex') {
                 if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'p' || e.key === 'S' || e.key === 'P')) {
