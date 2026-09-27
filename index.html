@@ -355,7 +355,7 @@
             visibility: hidden;
         }
 
-        /* Estilos para el modal del visor */
+        /* Estilos para el modal con visor PDF.js */
         .modal-visor {
             display: none;
             position: fixed;
@@ -426,6 +426,7 @@
             background: var(--bg);
         }
 
+        /* Iframe apuntando al visor externo de PDF.js configurado sin barra de herramientas */
         .modal-body iframe {
             width: 100%;
             height: 100%;
@@ -703,7 +704,7 @@
         </section>
     </main>
 
-    <!-- VENTANA MODAL PARA VISUALIZAR LOS PDF -->
+    <!-- VENTANA MODAL CON VISOR PDF.JS EXTERNO RESTRINGIDO -->
     <div id="modalVisor" class="modal-visor" aria-hidden="true">
         <div class="modal-contenido">
             <div class="modal-header">
@@ -711,7 +712,7 @@
                 <button id="btnCerrarModal" class="btn-cerrar-modal" aria-label="Cerrar visor">&times;</button>
             </div>
             <div class="modal-body" id="modalBodyContainer">
-                <!-- Se inyecta el iframe limpio para permitir scroll -->
+                <!-- Se inyecta el visor externo seguro configurado para ocultar botones -->
             </div>
         </div>
     </div>
@@ -767,9 +768,11 @@
 
                 modalTitulo.textContent = tituloDoc;
                 
-                // Con los parámetros #toolbar=0&navpanes=0 se quita la barra superior de descarga nativa del navegador,
-                // permitiendo hacer scroll y leer perfectamente sin bloquear la rueda del ratón.
-                modalBodyContainer.innerHTML = `<iframe src="${pdfUrl}#toolbar=0&navpanes=0&view=FitH" title="${tituloDoc}"></iframe>`;
+                // Usamos el visor web de PDF.js mediante un CDN seguro, pasando el archivo mediante el parámetro 'file'
+                // Los parámetros adicionales ocultan controles de descarga y barra lateral innecesaria
+                const visorUrl = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(pdfUrl)}#pagemode=none`;
+
+                modalBodyContainer.innerHTML = `<iframe src="${visorUrl}" title="${tituloDoc}"></iframe>`;
                 
                 modalVisor.style.display = 'flex';
                 modalVisor.setAttribute('aria-hidden', 'false');
@@ -790,7 +793,7 @@
             }
         });
 
-        // Bloquear atajos de teclado de guardado (Ctrl+S) e impresión (Ctrl+P)
+        // Bloquear atajos de teclado de guardado/impresión
         document.addEventListener('keydown', (e) => {
             if (modalVisor.style.display === 'flex') {
                 if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'p' || e.key === 'S' || e.key === 'P')) {
