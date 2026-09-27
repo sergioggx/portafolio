@@ -355,7 +355,7 @@
             visibility: hidden;
         }
 
-        /* Estilos para el modal del visor protegido */
+        /* Estilos para el modal del visor */
         .modal-visor {
             display: none;
             position: fixed;
@@ -389,7 +389,6 @@
             padding: 1rem 1.25rem;
             border-bottom: 1px solid var(--line);
             background: var(--bg);
-            z-index: 10;
         }
 
         .modal-header h4 {
@@ -431,14 +430,6 @@
             width: 100%;
             height: 100%;
             border: none;
-        }
-
-        /* Capa transparente que bloquea cualquier clic derecho directamente sobre el documento */
-        .visor-overlay {
-            position: absolute;
-            inset: 0;
-            z-index: 5;
-            background: transparent;
         }
 
         footer {
@@ -712,7 +703,7 @@
         </section>
     </main>
 
-    <!-- VENTANA MODAL PARA VISUALIZAR LOS PDF EN EL NAVEGADOR -->
+    <!-- VENTANA MODAL PARA VISUALIZAR LOS PDF -->
     <div id="modalVisor" class="modal-visor" aria-hidden="true">
         <div class="modal-contenido">
             <div class="modal-header">
@@ -720,7 +711,7 @@
                 <button id="btnCerrarModal" class="btn-cerrar-modal" aria-label="Cerrar visor">&times;</button>
             </div>
             <div class="modal-body" id="modalBodyContainer">
-                <!-- Se inyecta el iframe con su capa protectora encima -->
+                <!-- Se inyecta el iframe limpio para permitir scroll -->
             </div>
         </div>
     </div>
@@ -776,22 +767,12 @@
 
                 modalTitulo.textContent = tituloDoc;
                 
-                // Generamos el iframe y añadimos una capa transparente (.visor-overlay) encima 
-                // para capturar y bloquear cualquier clic derecho o interacción directa sobre el visor nativo.
-                modalBodyContainer.innerHTML = `
-                    <iframe src="${pdfUrl}#toolbar=0&navpanes=0&scrollbar=0&view=FitH" title="${tituloDoc}"></iframe>
-                    <div class="visor-overlay" id="visorOverlay"></div>
-                `;
+                // Con los parámetros #toolbar=0&navpanes=0 se quita la barra superior de descarga nativa del navegador,
+                // permitiendo hacer scroll y leer perfectamente sin bloquear la rueda del ratón.
+                modalBodyContainer.innerHTML = `<iframe src="${pdfUrl}#toolbar=0&navpanes=0&view=FitH" title="${tituloDoc}"></iframe>`;
                 
                 modalVisor.style.display = 'flex';
                 modalVisor.setAttribute('aria-hidden', 'false');
-
-                // Bloquear el menú contextual específicamente sobre la capa protectora del visor
-                const visorOverlay = document.getElementById('visorOverlay');
-                visorOverlay.addEventListener('contextmenu', (e) => {
-                    e.preventDefault();
-                    return false;
-                });
             });
         });
 
@@ -809,7 +790,7 @@
             }
         });
 
-        // Bloquear atajos de teclado para evitar guardado o impresión
+        // Bloquear atajos de teclado de guardado (Ctrl+S) e impresión (Ctrl+P)
         document.addEventListener('keydown', (e) => {
             if (modalVisor.style.display === 'flex') {
                 if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'p' || e.key === 'S' || e.key === 'P')) {
